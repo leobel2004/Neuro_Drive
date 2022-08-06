@@ -1,0 +1,73 @@
+* {
+    font-family: "Roboto", sans-serif;
+
+}
+
+body {
+    min-height: 100vh;
+    height: 100%;
+    background: #333333;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #c3262f, #333333);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #c3262f, #333333); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    overflow: hidden;
+    color: white;
+}
+
+body.light_theme {
+    background: #fcf4e3;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #c3262f, #fcf4e3);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #c3262f, #fcf4e3);
+    color: black;
+}
+
+.logo{
+    max-height: 100px;
+    margin-left: 96px;
+}
+
+.btn-toggle{
+    max-height: 60px;
+    border: none;
+    background: #320a18;
+    border-radius: 10px;
+    padding: 10px;
+    color: #fcf4e3;
+    width: 96px;
+    font-size: 20px;
+    font-weight: bold;
+}
+#header {
+    font-size: 20px;
+    color: #fcf4e3;
+    display: flex;
+    border: none;
+    margin-bottom: 15px;
+    justify-content: space-between;
+}
+
+h1 {
+    font-size: 30px;
+    color: black;
+    display: block;
+    border: none;
+
+}
+.test {
+    margin-top: 10px;
+    display: block;
+    text-decoration: none;
+    border: none;
+    background: #320a18;
+    border-radius: 10px;
+    padding: 20px;
+    color: #fcf4e3;
+    outline: none;
+    width: 70%;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+body.light_theme .test{
+    color: black;
+    background: #B22222;
+}

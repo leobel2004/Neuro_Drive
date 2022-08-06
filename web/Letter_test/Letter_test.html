@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+    <title>Letter test</title>
+        
+    <script src="eel.js"></script>
+    <link rel="icon" type="image/jpg" href="/favicon.jpg">
+        
+    <link rel="stylesheet" href="Letter_test.css">
+    <link href="https://fonts.googleeapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+        
+        
+    <script type="text/javascript" src="/eel.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        async function finish(){
+            eel.finish_Letter_test()();
+            window.location.href = 'Letter_test_results.html';
+        }
+        
+        async function right() {
+            let string_now = document.getElementById('work_text').innerHTML;
+            let res = await eel.right(string_now)();
+            document.getElementById('work_text').innerHTML = res;
+        }
+        
+        async function left() {
+            let string_now = document.getElementById('work_text').innerHTML;
+            let res = await eel.left(string_now)();
+            document.getElementById('work_text').innerHTML = res;
+        }
+        
+        async function up() {
+            let string_now = document.getElementById('work_text').innerHTML;
+            let res = await eel.up(string_now)();
+            document.getElementById('work_text').innerHTML = res;
+        }
+        
+        async function down() {
+            let string_now = document.getElementById('work_text').innerHTML;
+            let res = await eel.down(string_now)();
+            document.getElementById('work_text').innerHTML = res;
+        }
+        
+        document.addEventListener("keydown", function (event) {
+            if (event.code == 'KeyD'){
+                right();
+        }
+            if (event.code == 'KeyW'){
+                up();
+        }
+            if (event.code == 'KeyS'){
+                down();
+        }
+            if (event.code == 'KeyA'){
+                left();
+        }
+            if (event.code == 'Escape'){
+                window.location.href = '../Cover.html';
+            }
+            if (event.code == 'Enter'){
+                finish();
+            }
+        });
+    </script>
+        
+    <script type="text/javascript" id="timer_js">
+
+
+        function formatTimeLeft(time) {
+            const minutes = Math.floor(time / 60);
+            let seconds = time % 60;
+            if (seconds < 10) {
+                seconds = `0${seconds}`;
+            }
+        
+            return `${minutes}:${seconds}`;
+        }
+        
+        
+        var timeleft =100000000000;
+        var downloadTimer = setInterval(function(){
+            if (timeleft != 100000000000){
+            if(timeleft <= 0){
+                clearInterval(downloadTimer);
+                finish();
+            } else {
+                document.getElementById("timer").innerHTML = formatTimeLeft(timeleft);
+            }
+                timeleft -= 1;
+                }else {
+                    document.getElementById("timer").innerHTML = "+INF";
+                }
+            }, 1000);
+        </script>
+        
+</head>
+<body>
+    <div id="header">
+        <a href="../Cover.html" id="header_button"> Exit </a>
+        <span id='header_text'> Letter test </span>
+        <span id="timer">
+            00:00
+        </span>
+    </div>
+    <div align="center" id="main">
+    <div id="work_text">
+    <mark id="highlight">e</mark> c g h u e b j x u c y k e e e v d w e b q j i e s p a f w q c b n a h a u x b e k x j x e q e u i q v o x t f q i c m y z z g p h p i j h i w k r d n g u w n n q y x j x w r v g o v i t u i y j y z r t o m n c q y d l s w y q b a g j k w f g l e d o i r d o s z o m b r z r s t m u a l t v b b a o v q y r g m l g v n w q t v f g l t m x m w u m b e b i l u g q b x p g j r c o v b s p i q j l y d b e q w j d i s r k i o a g y b t p p l y e z w g x r q i d f e p c a o p w k v k e e h a z b p s k t k o g w k e z a b l x o c e x i q j e g b k x t w z h z y c r n a j f k n w y z y k s m h w x u v r i d l z e t z n r v i b w j d l s g p f o a b k z r t d y h m s v n z h e h h n n s x f q r r c s u q t s n d w o w e w z x i s h k x v a c s t l t h i h q c h z z y d v n u p a g j f r m f n a n f f v k h t g o y w y b t b j f l v i t b t w r n f n p l n c q o u j c d j l m m h t r i j g a q u d l m f v u k p u p z c n u v d l c p u g o h g v l x b a u d a z n k d j m l l g o e a n u h z o f x u n y f f o i n z c h u l y b y k g w y g r c j f t e m m x t i r l d k g a p h w m u a y v l z r j t g u j g y h d d h a j g o u g m n i i x y d o f c h f h u m p l r v l a d f z m z r z s r a e p a k f n l d q n w w e q n i c o z v z s z o j j a w d v u m i d g d g r a d j o u s b i j s t r s i v b w i b m m o h s o o x k d d a l b j y j m u w m c y r s v h u c h k r x j l c b l o s b p k v f b m o d t a x o l k l b h f q i m c t i a x t m m e n m q p l c x g s s r y v r n k e h m h f c m t y v n l n o a m e l j q z m s a g x w r r h e l k n z h y c k o r a m u g q t n w a l u m i l z g i t q k y o b j i y n d u c s b n w g e p q u w l q s s u a r x v x v p o l z c r n l f m v u o a k c f f g z b g n o y f j t w g f a w g w p j d i x f h y v y x j g t g a m y o o l c y o f g g s l f j m c p n f x v m w a s p w o m l l f l v u e i u r o e a o g h s o g k n b o n j c k x e n g a c g p z s h c x w c k u a s j i s o f e u s a m j z z n b m j f w z p d g v b d g g g h l t d x b u v k d s i h y f v d t h o n v k n g e g k q w o n r q u x j l i e c k o j r m f i r j p i h b g j p q g t h l h q q i b d m j z v m n x h p z q e e n v f g w w z x c g n w y u t r n p r y b u a o a w m i i r a q z e d o z p v z h d q m t e u b h v c p g t m u a r e v i w z c c n g a l j z f y r o s m c r u d s o j a q h e h g i z y t l o b y c g v e l l r o z a o j u n m z g r i c z p j f w i x t i y j v s r m z y e y i j r j c z t f h j h g n s w d s e w c y t g n d q a b h k d f u o m q i m y o j p w r z c h n z z w u e h e h q c g l d t u t v q d n i r f l b i y g l i d o t s n t h z g a d g f b k f s a j q l k e j e n r e i e s h y j z g b y t o q f c k e w o y q y k c u f i p e w j t l i f k w c e q f s v s o k k w f v u x l a f s w m x h l l n z m w u n g z x i y s i y f o f x m z l q p s h e e p f z k z m w d c f y s d s s k x e l d b o g l d i l b c l e o z m a c f d q h r j q i y c z m q s a u s g h a x y v h w x b z y a j j c o k g q n d n s p q j v h p h t j h v z k q l p j w q h r a s y n g t b o i e x e j r m m s j a i s o t z v z w j x x f l x a x m o t y l q q x c f m l r l d v b n j o e d h z l n v o j p r r t j k m k x n y u t s i n m h e s y h d o h u g u l q z t v q f g z n a h y v l d h u u i d f e a o i c v j s n l g h b m r x y a w a c z y k z g a r w w s d p y q v n t b d s v t n s k m b k v f o j h l b i x s y c x c t d p w z z b g o h j a a u c x q q v v r g h w b x f x c d g v v a j s j m j u f b v l k p k z t b m q m k r r y g a g f z t b u u q j l n n g w b u r m d i p y m m w e r j a b o h s f m j o w v x q b s w b h t u m a w j e d y a o w j d t u o k n b n s n g l p j r l s x e n l w v c x o l c b n s i x w r l h r t h w x r x t i w w m j f e w h n b o u k t o y i n w e x a k z k p n x w f y i k v h l x j h p g a w n a j w g j a a y e l m t v r l z p h c n d e h m f z r n d t p d j k r p a g p h y l r h v g b y v b l q a x l t x i g v t l h o p u m m b y r v t u a x u e r i g l j b l c f l w t w p n i c f j l c q a j e o t l m o b u l x n t d m e f v c p b i u w d f t o b x p b g y u g w x x i d u m f b q z w i w b i e h w p o b q u g x h h t l x y g e e f t z x a e o y m b w l k z s t o o f s a u i a f s j d q l j z p f a t n p b m b t p v u d b k o n t r y i j x y c b w v m n x t g k c r e s b c y u x u z i c t h w b f y m y k z q h e l y b j x a p t n j g k h y v w r k h w x t y k l a y e d h j e c u k y x w u k i f q l a w r l g w q f y z y p l h a z s f o j h k y g w o g y g v o i d y j b u u e t g g u q r q a f y r f q m h u v j n b e j o f f v s u m q j j p b k c l r a w a m a s h m a c p k w m r u h b u m u t h q y z d d v i v u q r c d m d r v o f c u h v e l d q q u v o d z j e l u t o u u v v v y x w w h w c r s h w s d q h r k q m a a x g c v b m d u m o n p y b k s v r m y y o t j x b s e q z v x k m a g u s n y i p o l k d c f n d q s w t p q q d m f p i q p r j p f h f d p n c b h f e b r j j z b p f x c l m r m q k k s j x g n j p f r u i j m i i p l d k v j g d c k r f n c y n x r i f v c v a i i l j e e p a i t z y b t n c z s q m y f e a i i b y q c e v p x p r p w b o c j p e w m g x o e z u i w a e i v g y h b f g q c j i m a d z x f s k n w x x h n b c x x j p m f o a d f y w n w v l o g l q v z q m s e w y v w q g x j p g f y c t p n i s o l i m l b s e q e f w e r j k r q j o q b m t b s p p h d b v w z c p x t a u q e d g m i i t m l p o x i p c r c i y y z t r e o a k f z a b j y f u b z y d u p o z h d y j k o d b c w q b z g i z u u d l w w w v d j l l w n a t m i e w g w c v u t u u x q f g w l p q z q o e t c n w m k t q w k m v j u v e o p p t p y u f j l i f u k t w f j n h d p i r m y j t n k d q j y v n x v m t u n h b a f l i u h u u e d h v l q q f r o u d u q x r f f r k q c l l c c i u n j i j m v e l h j l g i b r b k t p l a r m m v y f q b f r n w h k b v t w t o g p j y u m a z y f r o i o t p c o g g y t e a i v f t u z v l n n t d u d w v g d u k n g p b b c v l g p r t p c n e y q y d f v d v z v z r e f l o l w y k o g c v g q q q f r a x v u e i u e u w l b h h x u v y l v i g d y u x j u k i w p w e d z e b a e k u i h t s k o m g l u f c g i c g w r p t p e k r d r i x d c n c n x r h c u k i f d s h v r h e e g n r m o d m h n a q b g z u q g x r y e a a x j c t l y r v n e n w y s p v p l r g v k m i b s m t x e k q i b y b q v m p l y h x j b j c y h w r l p x w e q z v y u j l r p v b a d q e x b b b b x l y t l u t m h h w o l d k j h d z p h a t n a r o d v v s t w u i q t l z t c y k i e m x t d e h a t i a b m c h k l o o w j r o g u p v h o v o c h o x d h q e c g e h q c t m p y f o n r j g y u o k k p z p z f y y n u a n p w j f x p r b e k x x i k r h n r s c f s v y j o c l i n i q p l k t x y z g f z y u d p h q j b o j y d h k k i c s h e n t d q h k l r m s s h u c w a y a t z z k n m j y u d k b t y w n y e o h a x s q x z w w e u i d v w y g h v w l v v c a x j p q d x r y g i v s i n o b o n a v e u n h l e o l q j a e t t m m a b v a y l g t z a k l u u h b x u b r e w j n s h x p a j w d o e t x v o v i x h w i h a c m i q y f g m e a k g i b o c u o v o f y p x y m v l h q h w l s e y m y g o p n v n b x t q r a o m y w y g z w k u z y z u v m p x s u w z n j j y w y x y i c z v x q x n k n g r d l x y c r j l z p d o k z a n k d a p s a a b n y l g s v h n d p s s y j r i c h a j i m f h x t d d p s s s x s y n n b p v j p k w g j p f t j h c e e f j g d l x q a w c w y u a y e u a o z j p a f y e u q d d b f d m v t a c u y b u a z v b p s n o y a q u a a g d n t w q g k i s f t a m h h u b j s d p v p h c z x a o g f i l m m k f x w g e w m f e i q m x u t k u h g b f j h b n r x c n e z a h n p g u j u w j m y k e z s n p j z b l s p h o z m x l e z c e l a h r j x j a z p v v r z c o p l d o p a u e s w b c u u j y q a d u i p i j a s c e j q d g s e y f a e l f l n t c z a u x f x l i l u d k c c c i o h k h f l x j l k f u z m d b m k h x t x c f p r n p k n f w t y t q n i d p u a q p i s u p m u h s w u o o h a b u b b m y k a q f j g l b b x s g y d y z i t s i r r o r h o h k z r j m n c z z h d g t z c f o l p d b m r f s p j m h b e a w u b l x m s d s f a v o l n g c d d f x e p w q i l z f a m n g b u s s j w w x a z j j s x u j h u y k u n u f x a j q f f o n f d c y h k b z h g m f e f h w m m f q k x k z o l b x n n x t i s m k h c l y z m u k n n t k g z y t k a p f b i c b g g h x m u m x v d t x t g e w q p n g f n z h r s s a u y i t y u k r j t s r t d g x q c c i y p g f d g v s g e x i i c e h p m o e u e u e v r x c r d h t x f s v w k t p e n k n m e n s y f e y s y j t h d d b v x c w c l a g m a m d e h s z x n k d c i p v c r i m f o v w r u e r v h j r t w z q q j y r p f f e q q h y y r m g g m q f s u t o z w m u s k k j j d b y c u h z n k l e y i w d y y f c s w g o d y q f s p q n f d j g z e v x k c b a q j k b b y b e f s w k e v b g h n m d x n l q w q d q t w u z v v x w t y x x u h d z q o f s d x d l j g d c i r u v u c q s q r m z s a f l r a g n p w l r v y j d m w d m t o x k i u z r j h k x h v y r v y o x t i t t i y z e y m l x i x q j c o l e x g f k z r g j b c x x r r g o m o h r d w x o y c u a n o u t l s f j v h j k i y v d h r x o g w a p q a q g w k z p t y t i i n a p f g s j n m j a k a f u o m w b r c i r z z q c u v d k p u c k j q q o b r g n s g b v i q b e w j p c q c q g s k t s o l q e q z t l u j s x a c t e t k b s f l r r u k m k q g t t y b k y i k a z a w g v t u w d v c i o m k b v k g e j f u b p a h x e c a q z r z s p u o p g d k y c z f p h s f u n s z s w u x r v c d f y a s o b p q k o n i x r h u v e q a l g t i u b y j j w v p o p k q x y y m d l a v q p j l s g d c q i d h b x w q n v b w k v p o i q b z c n x v x b y n c t e v d t f f t z d n b j h s m o m c n b r z m t w r y z y v o d u t g g i v m g u o v w j p p y l m w z h r a w j a l o l j y a q l g a v k n g q v l m o e v w g z f j j g n i m j g f b m t d j g w h n y w x m t m a z x n h s v o p p a o z j c n t g t b p h i t w d c f u j o h b m u w t a q t f x r v p j i q o v g n g j l z l t g r k t k y v q b q r p d r n </div>
+    </div>
+</body>
+</html>
+    

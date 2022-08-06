@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        <title>Letter test</title>
+
+        <script src="eel.js"></script>
+        <link rel="icon" type="image/jpg" href="/favicon.jpg">
+
+        <link rel="stylesheet" href="Letter_test_start.css">
+        <link href="https://fonts.googleeapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+
+    <script type="text/javascript" src="/eel.js"></script>
+    <script type="text/javascript">
+        document.addEventListener("keydown", function (event) {
+            if (event.code == 'Escape'){
+                window.location.href = '../Cover.html';
+            }
+            if (event.code == 'Enter'){
+                get_info();
+            }
+        });
+
+
+        async function get_info(){
+            eel.get_letters(document.getElementById('red_letter').value, document.getElementById('blue_letter').value)();
+            eel.Letter_test_generate(document.getElementById('time').value)();
+            window.location.href = 'Letter_test.html';
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body align="center">
+    <div id="header">
+        <a href="../Cover.html" id="header_button"> Exit </a>
+        <span id='header_text'> Rules </span>
+        <span id="Space">
+        </span>
+    </div>
+    <p class="text"> It's Letter test, please choose two letters: red and blue. <br>
+        During the test: <br>
+    <ul align="left">
+    <li> <img src=""> Press Key S on keyboard to make highlighted letter red. </li>
+    <li> <img src=""> Press Key W on keyboard to make highlighted letter blue. </li>
+        <li> <img src=""> Press Key D on keyboard to highlight next letter. </li>
+        <li> <img src=""> Press Key A on keyboard to highlight previous letter. </li>
+        <li> <img src=""> Press Enter to finish test and get results. </li>
+        <li> <img src=""> Press Esc to back in main menu.</li>
+    </ul>
+    </p>    <h2>Please, enter settings</h2>
+    <span> Red letter : </span>
+    <input id="red_letter"
+           type="text"
+           autocomplete="on | off"
+           maxlength="1"
+           pattern="[a-z]"
+           placeholder="Enter letter a-z"
+           required
+           value = 'a'
+    >
+    <br>
+    <br>
+    <span> Blue letter : </span>
+    <input id="blue_letter"
+           type="text"
+           autocomplete="on | off"
+           maxlength="1"
+           pattern="[a-z]"
+           placeholder="Enter letter a-z"
+           required
+           value = 'b'
+    >
+    <br>
+    <br>
+    <span> Time (seconds) : </span>
+    <input id="time"
+           type="number"
+           autocomplete="on | off"
+           placeholder="Number of seconds"
+           min="10"
+           max="1000"
+           required
+    >
+    <br>
+    <button id="start" onclick="get_info()"> Let's start!</button>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stimul</title>
+
+    <script src="eel.js"></script>
+    <link rel="icon" type="image/jpg" href="/favicon.jpg">
+
+    <link rel="stylesheet" href="Cover.css">
+    <link href="https://fonts.googleeapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <script type="text/javascript" src="/eel.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script type="'text/javascript">
+        async function change_theme(){
+            eel.change_theme()();
+            eel.debug()();
+        }
+
+
+        const btn = document.querySelector('btn-toggle');
+        btn.addEventListener('click', function() {
+            document.body.classList.toggle('light_theme');
+            change_theme();
+        }
+    </script>
+
+</head>
+<body>
+    <div align="center" class="content">
+    <div id="header">
+        <p></p>
+        <img src="neuro_icon.png" alt="icon" class="logo">
+        <button class="btn-toggle">Change theme</button>
+    </div>
+        <h1> Stimul </h1>
+
+        <a class="test" href="/Reaction_test.html">Reaction test</a>
+        <a class="test" href="/Letter_test/Letter_test_start.html">Letter test</a>
+        <a class="test" href="/Array_test.html">Array test</a>
+        <a class="test" href="/Color_test.html">Color test</a>
+
+
+
+    </div>
+</body>
+</html>

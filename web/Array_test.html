@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Array test</title>
+</head>
+<body>
+<script type="text/javascript">
+var timeleft = 10;
+            var downloadTimer = setInterval(function(){
+              if(timeleft <= 0){
+                clearInterval(downloadTimer);
+                document.getElementById("timer").innerHTML = "Finished";
+              } else {
+                document.getElementById("timer").innerHTML = timeleft;
+              }
+              timeleft -= 1;
+            }, 1000);
+</script>
+</body>
+</html>
