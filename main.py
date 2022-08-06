@@ -37,9 +37,7 @@ def Letter_test_generate(timelimit):
     <script type="text/javascript">
         async function finish(){
             eel.finish_Letter_test()();
-            eel.debag()();
             window.location.href = 'Letter_test_results.html';
-            eel.debag()();
         }
         
         async function right() {
@@ -353,9 +351,9 @@ def finish_Letter_test():
                 skipped_red_letters += 1
             elif letter_text[integer * 2] == blue_letter:
                 skipped_blue_letters += 1
-    red_percent = correct_red_letters / (correct_red_letters + skipped_red_letters) * 1000 if (correct_red_letters + skipped_red_letters) != 0 else 1
-    blue_percent = correct_blue_letters / (correct_blue_letters + skipped_blue_letters) * 1000 if (correct_blue_letters + skipped_blue_letters) != 0 else 1
-    total_percent = (incorrect_red_letters + incorrect_blue_letters + skipped_red_letters + skipped_blue_letters) / total_count * 1000
+    red_percent = correct_red_letters / (correct_red_letters + skipped_red_letters) * 100 if (correct_red_letters + skipped_red_letters) != 0 else 100
+    blue_percent = correct_blue_letters / (correct_blue_letters + skipped_blue_letters) * 100 if (correct_blue_letters + skipped_blue_letters) != 0 else 100
+    total_percent = (incorrect_red_letters + incorrect_blue_letters + skipped_red_letters + skipped_blue_letters) / total_count * 100
     file = open('web/Letter_test/Letter_test_results.html', 'w')
     file.write(results[0])
     file.write(str(total_count))
@@ -368,7 +366,7 @@ def finish_Letter_test():
     file.write(results[4])
     file.write(str(correct_red_letters + skipped_red_letters))
     file.write(results[5])
-    file.write((str(int(red_percent))[:-1] + '.' + str(int(red_percent))[-1] if red_percent != 0 else '0')  + ' %')
+    file.write(str(round(red_percent, 1)) + ' %')
     file.write(results[6])
     file.write(str(correct_blue_letters))
     file.write(results[7])
@@ -378,11 +376,11 @@ def finish_Letter_test():
     file.write(results[9])
     file.write(str(correct_blue_letters + skipped_blue_letters))
     file.write(results[10])
-    file.write((str(int(blue_percent))[:-1] + '.' + str(int(blue_percent))[-1] if blue_percent != 0 else '0') + ' %')
+    file.write(str(round(blue_percent, 1)) + ' %')
     file.write(results[11])
     file.write(str(incorrect_red_letters + incorrect_blue_letters + skipped_red_letters + skipped_blue_letters))
     file.write(results[12])
-    file.write(str(int(total_percent))[:-1] + '.' + str(int(total_percent))[-1] + ' %')
+    file.write(str(round(total_percent)) + ' %')
     file.write(results[13])
     file.write(str(int(try_time)))
     file.write(results[14])
@@ -394,14 +392,14 @@ def finish_Letter_test():
     file.write('Count of incorrect red letters: ' + str(incorrect_red_letters) + '\n')
     file.write('Count of skipped red letters: ' + str(skipped_red_letters) + '\n')
     file.write('Total number of red letters: ' + str(correct_red_letters + skipped_red_letters) + '\n')
-    file.write('Total percentage of correct red letters: ' + (str(int(red_percent))[:-1] + '.' + str(int(red_percent))[-1] if red_percent != 0 else '0')  + ' %' + '\n')
+    file.write('Total percentage of correct red letters: ' + str(round(red_percent, 1)) + ' %' + '\n')
     file.write('Count of correct blue letters: ' + str(correct_blue_letters) + '\n')
     file.write('Count of incorrect blue letters: ' + str(incorrect_blue_letters) + '\n')
     file.write('Count of skipped blue letters: ' + str(skipped_blue_letters) + '\n')
     file.write('Total number of blue letters: ' + str(correct_blue_letters + skipped_blue_letters) + '\n')
-    file.write('Total percentage of correct blue letters: ' + (str(int(blue_percent))[:-1] + '.' + str(int(blue_percent))[-1] if blue_percent != 0 else '0') + ' %' + '\n')
+    file.write('Total percentage of correct blue letters: ' + str(round(blue_percent, 1)) + ' %' + '\n')
     file.write('Total failure: ' + str(incorrect_red_letters + incorrect_blue_letters + skipped_red_letters + skipped_blue_letters) + '\n')
-    file.write('Percentage of failures:' + str(incorrect_red_letters + incorrect_blue_letters + skipped_red_letters + skipped_blue_letters) + '\n')
+    file.write('Percentage of failures:' + str(round(total_percent)) + ' %' + '\n')
     file.write('Total time: ' + str(round(try_time, 1) - 1))
     file.close()
     return 0
