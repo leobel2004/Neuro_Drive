@@ -14,9 +14,16 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script type="'text/javascript">
+        async function color_test_start(){
+            eel.reset_colors()();
+        }
+
+        function color_test(){
+            color_test_start();
+        }
+
         async function change_theme(){
             eel.change_theme()();
-            eel.debug()();
         }
 
 
@@ -40,7 +47,7 @@
         <a class="test" href="/Reaction_test.html">Reaction test</a>
         <a class="test" href="/Letter_test/Letter_test_start.html">Letter test</a>
         <a class="test" href="/Array_test.html">Array test</a>
-        <a class="test" href="/Color_test.html">Color test</a>
+        <a class="test" onclick="color_test()" href="/Color_test/Color_test_start.html">Color test</a>
 
 
 

@@ -418,9 +418,17 @@ def get_theme():
     global Theme_color
     return Theme_color
 
+#functions for color test
 @eel.expose
-def debug():
-    print('hello')
+def change_colors(color):
+    global Colors
+    Colors[color] = not(Colors[color])
+
+@eel.expose
+def reset_colors():
+    global Colors
+    Colors = {'red': True, 'blue': True, 'green': True, 'yellow': True, 'purple': True, 'brown': True, 'white': True}
+    print('ok')
 
 
 
@@ -428,6 +436,8 @@ def debug():
 
 
 
+
+#letter_test variables
 letter_text = ''
 letter_cash = []
 blue_letter = 'a'
@@ -435,6 +445,8 @@ red_letter = 'b'
 time_start = 0
 
 Theme_color = 'black'
+
+Colors = {'red': True, 'blue': True, 'green': True, 'yellow': True, 'purple': True, 'brown': True, 'white': True}
 
 
 # initialisation app

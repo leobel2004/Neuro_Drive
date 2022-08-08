@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        <title>Color test</title>
+
+        <script src="eel.js"></script>
+        <link rel="icon" type="image/jpg" href="/favicon.jpg">
+
+        <link rel="stylesheet" href="Color_test_start.css">
+        <link href="https://fonts.googleeapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+
+    <script type="text/javascript" src="/eel.js"></script>
+    <script type="text/javascript">
+        document.addEventListener("keydown", function (event) {
+            if (event.code == 'Escape'){
+                window.location.href = '../Cover.html';
+            }
+            if (event.code == 'Enter'){
+                get_info();
+            }
+        });
+
+
+        async function get_info(){
+
+            eel.Letter_test_generate(document.getElementById('time').value)();
+            window.location.href = 'Color_test.html';
+        }
+    </script>
+    <script type="text/javascript">
+        var color_count = 7;
+
+        async function change_color(color){
+            eel.change_colors(color)();
+        }
+
+
+        function check_red(){
+            const red_checkbox = document.getElementById('red_checkbox');
+            if (red_checkbox.checked != true){
+                color_count -= 1;
+                change_color('red');
+                if (color_count < 3){
+                    color_count += 1;
+                    red_checkbox.checked = true;
+                    change_color('red');
+                }
+            }else{
+            color_count += 1;
+            change_color('red');
+                }
+        }
+
+        function check_blue(){
+        const blue_checkbox = document.getElementById('blue_checkbox');
+            change_color('blue');
+            if (blue_checkbox.checked != true){
+                color_count -= 1;
+                if (color_count < 3){
+                    color_count += 1
+                    blue_checkbox.checked = true;
+                    change_color('blue');
+                }
+            }else{
+                color_count += 1;
+            }
+        }
+
+        function check_yellow(){
+        const yellow_checkbox = document.getElementById('yellow_checkbox');
+        change_color('yellow');
+            if (yellow_checkbox.checked != true){
+                color_count -= 1;
+                if (color_count < 3){
+                    color_count += 1
+                    yellow_checkbox.checked = true;
+                    change_color('yellow');
+                }
+            }else{
+                color_count += 1;
+            }
+        }
+
+        function check_purple(){
+        const purple_checkbox = document.getElementById('purple_checkbox');
+        change_color('purple');
+            if (purple_checkbox.checked != true){
+                color_count -= 1;
+                if (color_count < 3){
+                    color_count += 1
+                    purple_checkbox.checked = true;
+                    change_color('purple');
+                }
+            }else{
+                color_count += 1;
+            }
+        }
+
+        function check_brown(){
+        const brown_checkbox = document.getElementById('brown_checkbox');
+        change_color('brown');
+            if (brown_checkbox.checked != true){
+                color_count -= 1;
+                if (color_count < 3){
+                    color_count += 1
+                    brown_checkbox.checked = true;
+                    change_color('brown');
+                }
+            }else{
+                color_count += 1;
+            }
+        }
+
+        function check_white() {
+        const white_checkbox = document.getElementById('white_checkbox');
+        change_color('white');
+            if (white_checkbox.checked != true){
+                color_count -= 1;
+                if (color_count < 3){
+                    color_count += 1
+                    white_checkbox.checked = true;
+                    change_color('white');
+                }
+            }else{
+                color_count += 1;
+            }
+        }
+
+        function check_green(){
+        const green_checkbox = document.getElementById('green_checkbox');
+        change_color('green');
+            if (green_checkbox.checked != true){
+                color_count -= 1;
+                if (color_count < 3){
+                    color_count += 1
+                    green_checkbox.checked = true;
+                    change_color('green');
+                }
+            }else{
+                color_count += 1;
+            }
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body align="center">
+    <div id="header">
+        <a href="../Cover.html" id="header_button"> Exit </a>
+        <span id='header_text'> Rules </span>
+        <span id="Space">
+        </span>
+    </div>
+    <p class="text"> It's Color test, please choose more than two colors to begin. <br>
+        During the test: <br>
+    <ul align="left">
+        <li> <img src=""> Press Enter, if color of word matches the word.</li>
+        <li> <img src=""> Press Esc, if color of word dismatches the word.</li>
+    </ul>
+    </p>    <h2>Please, enter settings:</h2>
+    <label class="container"> <div class="red">Red</div>
+        <input type="checkbox" checked="checked" id="red_checkbox"
+        onclick="check_red()">
+        <span class="checkmark"></span>
+    </label>
+    <label class="container"> <div class="blue">Blue</div>
+        <input type="checkbox" checked="checked" id="blue_checkbox"
+        onclick="check_blue()">
+        <span class="checkmark"></span>
+    </label>
+    <label class="container"> <div class="yellow">Yellow</div>
+        <input type="checkbox" checked="checked" id="yellow_checkbox"
+        onclick="check_yellow()">
+        <span class="checkmark"></span>
+    </label>
+    <label class="container"> <div class="purple">Purple</div>
+        <input type="checkbox" checked="checked" id="purple_checkbox"
+        onclick="check_purple()">
+        <span class="checkmark"></span>
+    </label>
+    <label class="container"> <div class="green">Green</div>
+        <input type="checkbox" checked="checked" id="green_checkbox"
+        onclick="check_green()">
+        <span class="checkmark"></span>
+    </label>
+    <label class="container"> <div class="brown">Brown</div>
+        <input type="checkbox" checked="checked" id="brown_checkbox"
+        onclick="check_brown()">
+        <span class="checkmark"></span>
+    </label>
+    <label class="container"> <div>White</div>
+        <input type="checkbox" checked="checked" id="white_checkbox"
+        onclick="check_white()">
+        <span class="checkmark"></span>
+    </label>
+    <br>
+    <br>
+    <span> Time (seconds) : </span>
+    <input id="time"
+           type="number"
+           autocomplete="on | off"
+           placeholder="Number of seconds"
+           min="10"
+           max="1000"
+           required
+    >
+    <br>
+    <button id="start" onclick="get_info()"> Let's start!</button>
+</body>
+</html>
