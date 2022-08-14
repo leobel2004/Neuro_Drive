@@ -25,7 +25,7 @@ body.light_theme {
     margin-left: 96px;
 }
 
-.btn-toggle{
+.header_button{
     max-height: 60px;
     border: none;
     background: #320a18;
@@ -69,5 +69,10 @@ h1 {
 
 body.light_theme .test{
     color: black;
-    background: #B22222;
+    background: #ff4c5b;
+}
+
+body.light_theme .header_button{
+    color: black;
+    background: #ff4c5b;
 }

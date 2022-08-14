@@ -152,7 +152,6 @@ def Letter_test_generate(timelimit):
     letter_text = text
     letter_cash = []
     time_start = time.time()
-    print('shalom')
     return 0
 
 
@@ -420,6 +419,84 @@ def get_theme():
 
 #functions for color test
 @eel.expose
+def Color_test_generate(timelimit):
+    global Colors, words, words_colors, color_index, color_cash, time_start
+    color_index = 0
+    color_cash = []
+    words = []
+    words_colors = []
+    if not(timelimit):
+        timelimit = 70
+    else:
+        timelimit = int(timelimit)
+    colors_pull = []
+    for key in Colors:
+        if Colors[key]:
+            colors_pull.append(key)
+    number_of_words = timelimit * 3
+    for i in range(number_of_words):
+        words.append(colors_pull[random.randint(0, len(colors_pull) - 1)])
+        words_colors.append(colors_pull[random.randint(0, len(colors_pull) - 1)])
+    file = open('web/Color_test/Color_test.html', 'w')
+    file_ex = open('web/Color_test/Color_test_example.html', 'r')
+    file.write(file_ex.read().replace('{timeleft}', str(timelimit)))
+    file.close()
+    file_ex.close()
+    time_start = time.time()
+
+@eel.expose
+def finish_Color_test():
+    global time_start, words, words_colors, color_cash
+    example = open('web/Color_test/Color_test_results_example.html', 'r')
+    res = open('web/Color_test/Color_test_results.html', 'w')
+    results = open('web/Color_test/Color_test_results.txt', 'w')
+    try_time = time.time() - time_start
+    count = len(color_cash)
+    correct_count = 0
+    failure_count = 0
+    for i in range(count):
+        if words[i] == words_colors[i] and color_cash[i] == 'match':
+            correct_count += 1
+        elif words[i] != words_colors[i] and color_cash[i] == 'dismatch':
+            correct_count += 1
+        else:
+            failure_count += 1
+    string = example.read()
+    string = string.replace('{Number_of_words}', str(count))
+    string = string.replace('{Number_of_errors}', str(failure_count))
+    string = string.replace('{Percent_of_errors}', str(round((failure_count / count if count else 1) * 100, 1)) + ' %')
+    string = string.replace('{Total_time}', str(round(try_time, 0) - 1))
+    res.write(string)
+    results.write("Number of words: " + str(count) + '\n')
+    results.write("Number of errors: " + str(failure_count) + '\n')
+    results.write("Percentage of errors: " +  str(round((failure_count / count if count else 1) * 100, 1)) + ' %' + '\n')
+    results.write('Total time: ' + str(round(try_time, 0) - 1))
+    res.close()
+    results.close()
+
+
+
+@eel.expose
+def color_match():
+    global color_cash, color_index
+    color_cash.append('match')
+    color_index += 1
+
+@eel.expose
+def color_dismatch():
+    global color_cash, color_index
+    color_cash.append('dismatch')
+    color_index += 1
+
+@eel.expose
+def get_word():
+    global color_index, words, words_colors
+    s = '<div class="'
+    s += words_colors[color_index] + '"> ' + words[color_index] + '</div>'
+    print(s)
+    return s
+
+@eel.expose
 def change_colors(color):
     global Colors
     Colors[color] = not(Colors[color])
@@ -428,7 +505,7 @@ def change_colors(color):
 def reset_colors():
     global Colors
     Colors = {'red': True, 'blue': True, 'green': True, 'yellow': True, 'purple': True, 'brown': True, 'white': True}
-    print('ok')
+
 
 
 
@@ -442,11 +519,15 @@ letter_text = ''
 letter_cash = []
 blue_letter = 'a'
 red_letter = 'b'
-time_start = 0
 
+time_start = 0
 Theme_color = 'black'
 
 Colors = {'red': True, 'blue': True, 'green': True, 'yellow': True, 'purple': True, 'brown': True, 'white': True}
+words = []
+words_colors = []
+index = 0
+color_cash = []
 
 
 # initialisation app
