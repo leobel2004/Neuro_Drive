@@ -1,14 +1,14 @@
-Total number of letters passed: 28
-Total failure: 9Count of correct red letters: 0
-Count of incorrect red letters: 9
-Count of skipped red letters: 0
-Total number of red letters: 0
-Total percentage of correct red letters: 100 %
+Total number of letters passed: 196
+Total failure: 14Count of correct red letters: 0
+Count of incorrect red letters: 1
+Count of skipped red letters: 2
+Total number of red letters: 2
+Total percentage of correct red letters: 0.0 %
 Count of correct blue letters: 0
-Count of incorrect blue letters: 0
-Count of skipped blue letters: 0
-Total number of blue letters: 0
-Total percentage of correct blue letters: 100 %
-Total failure: 9
-Percentage of failures:32 %
-Total time: 2.2
+Count of incorrect blue letters: 5
+Count of skipped blue letters: 6
+Total number of blue letters: 6
+Total percentage of correct blue letters: 0.0 %
+Total failure: 14
+Percentage of failures:7 %
+Total time: 64.1

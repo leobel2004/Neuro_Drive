@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+    <title>Array test</title>
+
+    <script src="eel.js"></script>
+    <link rel="icon" type="image/jpg" href="/favicon.jpg">
+
+    <link rel="stylesheet" href="Array_test.css">
+    <link href="https://fonts.googleeapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+
+    <script type="text/javascript" src="/eel.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        async function finish(){
+            eel.finish_Array_test("double", "10", "black_begin")();
+            alert();
+            window.location.href = 'Array_test_results.html';
+        }
+
+        document.addEventListener("keydown", function (event) {
+            if (event.code == 'Escape'){
+                window.location.href = '../Cover.html';
+            }
+            if (event.code == 'Enter'){
+                finish();
+            }
+        });
+    </script>
+    <script type="text/javascript">
+        const end = 100;
+        const half = Math.floor((end + 1) / 2);
+        var num_now = 0;
+        const type = "double";
+        const task = "black_begin";
+
+        function check_number(n){
+            if (n == num_now + 1){
+                num_now += 1;
+                make_green(n);
+                if (n == end){
+                finish();
+                }
+            }
+            else{
+                make_red(n);
+            }
+        }
+
+        function make_green(n){
+            var timeleft = 2;
+            var t = setInterval(function(){
+            if(timeleft <= 0){
+                clearInterval(t);
+            } else {
+                timeleft -= 1;
+                document.getElementById("num" + n).classList.toggle('green');}
+            }, 200);
+            document.getElementById('Hinter').innerHTML = "";
+        }
+
+        function make_red(n){
+            var timeleft = 2;
+            var t = setInterval(function(){
+            if(timeleft <= 0){
+                clearInterval(t);
+            } else {
+                timeleft -= 1;
+                document.getElementById("num" + n).classList.toggle('red');}
+            }, 200);
+            if (type == 'simple'){
+            document.getElementById('Hinter').innerHTML = "Now, you need to press " + (num_now + 1);
+            }else{
+            if(task == 'white'){
+                if (num_now < half){
+                    document.getElementById('Hinter').innerHTML = "Now, you need to press white " + (num_now + 1);
+                }else{
+                    document.getElementById('Hinter').innerHTML = "Now, you need to press black " + (num_now + 1 - half);
+                }
+            }
+            if(task == 'black'){
+                if (num_now < half){
+                    document.getElementById('Hinter').innerHTML = "Now, you need to press black " + (num_now + 1);
+                }else{
+                    document.getElementById('Hinter').innerHTML = "Now, you need to press white " + (num_now + 1 - half);
+                }
+            }
+            if(task == 'white_begin'){
+                if (num_now % 2 == 0){
+                    document.getElementById('Hinter').innerHTML = "Now, you need to press white " + (Math.floor(num_now / 2) + 1);
+                }else{
+                    document.getElementById('Hinter').innerHTML = "Now, you need to press black " + (Math.floor(num_now / 2) + 1);
+                }
+            }
+
+            if(task == 'black_begin'){
+                if (num_now % 2 == 1){
+                    document.getElementById('Hinter').innerHTML = "Now, you need to press white " + (Math.floor(num_now / 2) + 1);
+                }else{
+                    document.getElementById('Hinter').innerHTML = "Now, you need to press black " + (Math.floor(num_now / 2) + 1);
+                }
+            }
+
+            }
+        }
+    </script>
+    <script type="text/javascript" id="timer_js">
+        function formatTimeLeft(time) {
+            const minutes = Math.floor(time / 60);
+            let seconds = time % 60;
+            if (seconds < 10) {
+                seconds = `0${seconds}`;
+            }
+
+            return `${minutes}:${seconds}`;
+        }
+
+
+        var timeleft = 1;
+        var downloadTimer = setInterval(async function(){
+            if(timeleft < 0){
+                clearInterval(downloadTimer);
+                finish();
+            } else {
+                document.getElementById("timer").innerHTML = formatTimeLeft(timeleft);
+            }
+                timeleft += 1;
+            }, 1000);
+        </script>
+
+</head>
+<body>
+    <div id="header">
+        <a href="../Cover.html" id="header_button"> Exit </a>
+        <span id='header_text'> Array test </span>
+        <span id="timer">
+        </span>
+    </div>
+    <div align="center" id="main">
+        <div class="work">
+<button class='black10' onclick='check_number(35)' id='num35'>18</button>
+<button class='black10' onclick='check_number(21)' id='num21'>11</button>
+<button class='black10' onclick='check_number(51)' id='num51'>26</button>
+<button class='black10' onclick='check_number(77)' id='num77'>39</button>
+<button class='black10' onclick='check_number(19)' id='num19'>10</button>
+<button class='black10' onclick='check_number(45)' id='num45'>23</button>
+<button class='black10' onclick='check_number(83)' id='num83'>42</button>
+<button class='white10' onclick='check_number(10)' id='num10'>5</button>
+<button class='black10' onclick='check_number(61)' id='num61'>31</button>
+<button class='black10' onclick='check_number(57)' id='num57'>29</button>
+</div>
+<div class="work">
+<button class='white10' onclick='check_number(14)' id='num14'>7</button>
+<button class='black10' onclick='check_number(43)' id='num43'>22</button>
+<button class='black10' onclick='check_number(27)' id='num27'>14</button>
+<button class='black10' onclick='check_number(29)' id='num29'>15</button>
+<button class='white10' onclick='check_number(12)' id='num12'>6</button>
+<button class='black10' onclick='check_number(31)' id='num31'>16</button>
+<button class='white10' onclick='check_number(28)' id='num28'>14</button>
+<button class='white10' onclick='check_number(8)' id='num8'>4</button>
+<button class='black10' onclick='check_number(9)' id='num9'>5</button>
+<button class='black10' onclick='check_number(17)' id='num17'>9</button>
+</div>
+<div class="work">
+<button class='white10' onclick='check_number(50)' id='num50'>25</button>
+<button class='white10' onclick='check_number(94)' id='num94'>47</button>
+<button class='black10' onclick='check_number(59)' id='num59'>30</button>
+<button class='black10' onclick='check_number(5)' id='num5'>3</button>
+<button class='white10' onclick='check_number(78)' id='num78'>39</button>
+<button class='black10' onclick='check_number(73)' id='num73'>37</button>
+<button class='black10' onclick='check_number(23)' id='num23'>12</button>
+<button class='white10' onclick='check_number(90)' id='num90'>45</button>
+<button class='black10' onclick='check_number(11)' id='num11'>6</button>
+<button class='black10' onclick='check_number(1)' id='num1'>1</button>
+</div>
+<div class="work">
+<button class='white10' onclick='check_number(92)' id='num92'>46</button>
+<button class='black10' onclick='check_number(81)' id='num81'>41</button>
+<button class='black10' onclick='check_number(85)' id='num85'>43</button>
+<button class='black10' onclick='check_number(37)' id='num37'>19</button>
+<button class='white10' onclick='check_number(40)' id='num40'>20</button>
+<button class='white10' onclick='check_number(46)' id='num46'>23</button>
+<button class='black10' onclick='check_number(99)' id='num99'>50</button>
+<button class='white10' onclick='check_number(34)' id='num34'>17</button>
+<button class='white10' onclick='check_number(48)' id='num48'>24</button>
+<button class='black10' onclick='check_number(63)' id='num63'>32</button>
+</div>
+<div class="work">
+<button class='white10' onclick='check_number(98)' id='num98'>49</button>
+<button class='black10' onclick='check_number(79)' id='num79'>40</button>
+<button class='white10' onclick='check_number(2)' id='num2'>1</button>
+<button class='black10' onclick='check_number(33)' id='num33'>17</button>
+<button class='white10' onclick='check_number(74)' id='num74'>37</button>
+<button class='white10' onclick='check_number(80)' id='num80'>40</button>
+<button class='white10' onclick='check_number(100)' id='num100'>50</button>
+<button class='black10' onclick='check_number(95)' id='num95'>48</button>
+<button class='black10' onclick='check_number(25)' id='num25'>13</button>
+<button class='black10' onclick='check_number(71)' id='num71'>36</button>
+</div>
+<div class="work">
+<button class='black10' onclick='check_number(39)' id='num39'>20</button>
+<button class='white10' onclick='check_number(58)' id='num58'>29</button>
+<button class='white10' onclick='check_number(86)' id='num86'>43</button>
+<button class='white10' onclick='check_number(6)' id='num6'>3</button>
+<button class='white10' onclick='check_number(62)' id='num62'>31</button>
+<button class='white10' onclick='check_number(72)' id='num72'>36</button>
+<button class='white10' onclick='check_number(76)' id='num76'>38</button>
+<button class='white10' onclick='check_number(26)' id='num26'>13</button>
+<button class='black10' onclick='check_number(93)' id='num93'>47</button>
+<button class='white10' onclick='check_number(52)' id='num52'>26</button>
+</div>
+<div class="work">
+<button class='black10' onclick='check_number(67)' id='num67'>34</button>
+<button class='white10' onclick='check_number(30)' id='num30'>15</button>
+<button class='black10' onclick='check_number(87)' id='num87'>44</button>
+<button class='white10' onclick='check_number(60)' id='num60'>30</button>
+<button class='black10' onclick='check_number(75)' id='num75'>38</button>
+<button class='black10' onclick='check_number(53)' id='num53'>27</button>
+<button class='black10' onclick='check_number(69)' id='num69'>35</button>
+<button class='white10' onclick='check_number(4)' id='num4'>2</button>
+<button class='black10' onclick='check_number(3)' id='num3'>2</button>
+<button class='black10' onclick='check_number(89)' id='num89'>45</button>
+</div>
+<div class="work">
+<button class='white10' onclick='check_number(82)' id='num82'>41</button>
+<button class='black10' onclick='check_number(91)' id='num91'>46</button>
+<button class='white10' onclick='check_number(38)' id='num38'>19</button>
+<button class='white10' onclick='check_number(68)' id='num68'>34</button>
+<button class='black10' onclick='check_number(65)' id='num65'>33</button>
+<button class='white10' onclick='check_number(56)' id='num56'>28</button>
+<button class='white10' onclick='check_number(66)' id='num66'>33</button>
+<button class='white10' onclick='check_number(32)' id='num32'>16</button>
+<button class='black10' onclick='check_number(41)' id='num41'>21</button>
+<button class='white10' onclick='check_number(88)' id='num88'>44</button>
+</div>
+<div class="work">
+<button class='white10' onclick='check_number(44)' id='num44'>22</button>
+<button class='white10' onclick='check_number(36)' id='num36'>18</button>
+<button class='white10' onclick='check_number(42)' id='num42'>21</button>
+<button class='white10' onclick='check_number(54)' id='num54'>27</button>
+<button class='black10' onclick='check_number(55)' id='num55'>28</button>
+<button class='black10' onclick='check_number(13)' id='num13'>7</button>
+<button class='black10' onclick='check_number(15)' id='num15'>8</button>
+<button class='white10' onclick='check_number(22)' id='num22'>11</button>
+<button class='white10' onclick='check_number(24)' id='num24'>12</button>
+<button class='white10' onclick='check_number(18)' id='num18'>9</button>
+</div>
+<div class="work">
+<button class='black10' onclick='check_number(47)' id='num47'>24</button>
+<button class='white10' onclick='check_number(64)' id='num64'>32</button>
+<button class='black10' onclick='check_number(97)' id='num97'>49</button>
+<button class='black10' onclick='check_number(49)' id='num49'>25</button>
+<button class='white10' onclick='check_number(16)' id='num16'>8</button>
+<button class='white10' onclick='check_number(70)' id='num70'>35</button>
+<button class='black10' onclick='check_number(7)' id='num7'>4</button>
+<button class='white10' onclick='check_number(96)' id='num96'>48</button>
+<button class='white10' onclick='check_number(20)' id='num20'>10</button>
+<button class='white10' onclick='check_number(84)' id='num84'>42</button>
+
+    </div>
+    <p align="center" id="Hinter"></p>
+</body>
+</html>

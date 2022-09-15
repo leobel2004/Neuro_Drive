@@ -507,6 +507,52 @@ def reset_colors():
     Colors = {'red': True, 'blue': True, 'green': True, 'yellow': True, 'purple': True, 'brown': True, 'white': True}
 
 
+#functions for Array test
+@eel.expose
+def Array_test_generate(type, size, task, color):
+    global time_start
+    end = int(size) ** 2
+    if type == 'simple':
+        l = [f"<button class='{color}{size}' onclick='check_number({i + 1})' id='num{i + 1}'>{i + 1}</button>\n" for i in range(int(size) ** 2)]
+    else:
+        if task == 'white' or task == 'black':
+            color1 = 'white'
+            color2 = 'black'
+            if task == 'black':
+                color1, color2 = color2, color1
+            l = [f"<button class='{color1 if i < ((end + 1) // 2) else color2}{size}' onclick='check_number({i + 1})' id='num{i + 1}'>{i % ((end + 1) // 2) + 1}</button>\n" for i in range(end)]
+        else:
+            color1 = 'white'
+            color2 = 'black'
+            if task == 'black_begin':
+                color1, color2 = color2, color1
+            l = [f"<button class='{color2 if i % 2 else color1}{size}' onclick='check_number({i + 1})' id='num{i + 1}'>{i // 2 + 1}</button>\n" for i in range(end)]
+    random.shuffle(l)
+    text = '<div class="work">\n'
+    for i in range(end):
+        if i == end:
+            text += '</div>\n'
+        elif i % int(size) == 0 and i != 0:
+            text += '</div>\n<div class="work">\n'
+        text += l[i]
+    file = open('web/Array_test/Array_test.html', 'w')
+    file_ex = open('web/Array_test/Array_test_example_simple.html', 'r')
+    file.write((file_ex.read().replace('{work_text}', text)).replace("{end}", str(end)).replace('{type}', type).replace("{size}", size).replace("{task}", task))
+    file.close()
+    file_ex.close()
+    time_start = time.time()
+
+@eel.expose
+def finish_Array_test(type, size, task):
+    timer = time.time() - time_start
+    file = open('web/Array_test/Array_test_results.html', 'w')
+    file.write(str(timer) + '\n')
+    file.write(type + '\n')
+    file.write(size + 'X' + size + '\n')
+    file.write(task + '\n')
+    file.close()
+
+
 
 
 
@@ -523,6 +569,7 @@ red_letter = 'b'
 time_start = 0
 Theme_color = 'black'
 
+#color_test variables
 Colors = {'red': True, 'blue': True, 'green': True, 'yellow': True, 'purple': True, 'brown': True, 'white': True}
 words = []
 words_colors = []
@@ -532,4 +579,4 @@ color_cash = []
 
 # initialisation app
 cover_init()
-
+# Array_test_generate('simple', '10', ' ', 'white')

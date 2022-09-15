@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+    <title>Array test</title>
+
+    <script src="eel.js"></script>
+    <link rel="icon" type="image/jpg" href="/favicon.jpg">
+
+    <link rel="stylesheet" href="Array_test.css">
+    <link href="https://fonts.googleeapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+
+    <script type="text/javascript" src="/eel.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        async function finish(){
+            eel.finish_Array_test("{type}", "{size}", "{task}")();
+            alert();
+            window.location.href = 'Array_test_results.html';
+        }
+
+        document.addEventListener("keydown", function (event) {
+            if (event.code == 'Escape'){
+                window.location.href = '../Cover.html';
+            }
+            if (event.code == 'Enter'){
+                finish();
+            }
+        });
+    </script>
+    <script type="text/javascript">
+        const end = {end};
+        const half = Math.floor((end + 1) / 2);
+        var num_now = 0;
+        const type = "{type}";
+        const task = "{task}";
+
+        function check_number(n){
+            if (n == num_now + 1){
+                num_now += 1;
+                make_green(n);
+                if (n == end){
+                finish();
+                }
+            }
+            else{
+                make_red(n);
+            }
+        }
+
+        function make_green(n){
+            var timeleft = 2;
+            var t = setInterval(function(){
+            if(timeleft <= 0){
+                clearInterval(t);
+            } else {
+                timeleft -= 1;
+                document.getElementById("num" + n).classList.toggle('green');}
+            }, 200);
+            document.getElementById('Hinter').innerHTML = "";
+        }
+
+        function make_red(n){
+            var timeleft = 2;
+            var t = setInterval(function(){
+            if(timeleft <= 0){
+                clearInterval(t);
+            } else {
+                timeleft -= 1;
+                document.getElementById("num" + n).classList.toggle('red');}
+            }, 200);
+            if (type == 'simple'){
+            document.getElementById('Hinter').innerHTML = "Now, you need to press " + (num_now + 1);
+            }else{
+            if(task == 'white'){
+                if (num_now < half){
+                    document.getElementById('Hinter').innerHTML = "Now, you need to press white " + (num_now + 1);
+                }else{
+                    document.getElementById('Hinter').innerHTML = "Now, you need to press black " + (num_now + 1 - half);
+                }
+            }
+            if(task == 'black'){
+                if (num_now < half){
+                    document.getElementById('Hinter').innerHTML = "Now, you need to press black " + (num_now + 1);
+                }else{
+                    document.getElementById('Hinter').innerHTML = "Now, you need to press white " + (num_now + 1 - half);
+                }
+            }
+            if(task == 'white_begin'){
+                if (num_now % 2 == 0){
+                    document.getElementById('Hinter').innerHTML = "Now, you need to press white " + (Math.floor(num_now / 2) + 1);
+                }else{
+                    document.getElementById('Hinter').innerHTML = "Now, you need to press black " + (Math.floor(num_now / 2) + 1);
+                }
+            }
+
+            if(task == 'black_begin'){
+                if (num_now % 2 == 1){
+                    document.getElementById('Hinter').innerHTML = "Now, you need to press white " + (Math.floor(num_now / 2) + 1);
+                }else{
+                    document.getElementById('Hinter').innerHTML = "Now, you need to press black " + (Math.floor(num_now / 2) + 1);
+                }
+            }
+
+            }
+        }
+    </script>
+    <script type="text/javascript" id="timer_js">
+        function formatTimeLeft(time) {
+            const minutes = Math.floor(time / 60);
+            let seconds = time % 60;
+            if (seconds < 10) {
+                seconds = `0${seconds}`;
+            }
+
+            return `${minutes}:${seconds}`;
+        }
+
+
+        var timeleft = 1;
+        var downloadTimer = setInterval(async function(){
+            if(timeleft < 0){
+                clearInterval(downloadTimer);
+                finish();
+            } else {
+                document.getElementById("timer").innerHTML = formatTimeLeft(timeleft);
+            }
+                timeleft += 1;
+            }, 1000);
+        </script>
+
+</head>
+<body>
+    <div id="header">
+        <a href="../Cover.html" id="header_button"> Exit </a>
+        <span id='header_text'> Array test </span>
+        <span id="timer">
+        </span>
+    </div>
+    <div align="center" id="main">
+        {work_text}
+    </div>
+    <p align="center" id="Hinter"></p>
+</body>
+</html>

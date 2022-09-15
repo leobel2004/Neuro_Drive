@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        <title>Array test</title>
+
+        <script src="eel.js"></script>
+        <link rel="icon" type="image/jpg" href="/favicon.jpg">
+
+        <link rel="stylesheet" href="Array_test_start.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link href="https://fonts.googleeapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+
+    <script type="text/javascript" src="/eel.js"></script>
+    <script type="text/javascript">
+        document.addEventListener("keydown", function (event) {
+            if (event.code == 'Escape'){
+                window.location.href = '../Cover.html';
+            }
+            if (event.code == 'Enter'){
+                get_info();
+            }
+        });
+
+
+        async function get_info(){
+            const array_type = document.querySelector('input[name="array"]:checked').value;
+            const array_size = document.querySelector('input[name="size"]:checked').value;
+            const array_task = document.querySelector('input[name="task"]:checked').value;
+            const array_color = document.querySelector('input[name="color"]:checked').value;
+            eel.Array_test_generate(array_type, array_size, array_task, array_color)();
+            window.location.href = 'Array_test.html';
+        }
+    </script>
+    <script type="text/javascript">
+        function change_simple(){
+            $("#colors").css('display', 'block');
+            $("#tasks").css('display', 'none');
+        }
+
+        function change_double(){
+            $('#tasks').css('display', 'block');
+            $("#colors").css('display', 'none');
+        }
+
+    </script>
+</head>
+<body align="center">
+    <div id="header">
+        <a href="../Cover.html" id="header_button"> Exit </a>
+        <span id='header_text'> Rules </span>
+        <span id="Space">
+        </span>
+    </div>
+    <p class="text"> It's Array test, please follow the task. <br>
+        During the test: <br>
+    <ul align="center">
+        <li> <img src=""> Click all numbers in order.</li>
+    </ul>
+    </p>    <h2>Please, enter settings:</h2>
+    <div id="array_type">
+		<label class="var">
+            Simple array
+			<input type="radio" name="array" value="simple" onchange="change_simple()">
+		</label>
+		<label class="var">
+            Double array
+			<input type="radio" name="array" value="double" onchange="change_double()">
+		</label>
+	</div>
+    <br>
+    <div id="array_size">
+        Enter array size:
+		<label class="var">
+            6 X 6
+			<input type="radio" name="size" value="6">
+		</label>
+		<label class="var">
+            7 X 7
+			<input type="radio" name="size" value="7">
+		</label>
+        <label class="var">
+            8 X 8
+			<input type="radio" name="size" value="8">
+		</label>
+        <label class="var">
+            9 X 9
+			<input type="radio" name="size" value="9">
+		</label>
+        <label class="var">
+            10 X 10
+			<input type="radio" name="size" value="10">
+		</label>
+	</div>
+    <br>
+    <div id="tasks">
+    Enter task:
+        <label class="var">
+            all white cells -> all black cells
+			<input type="radio" name="task" value="white" checked="True">
+		</label>
+		<label class="var">
+            all black cells -> all white cells
+			<input type="radio" name="task" value="black">
+		</label>
+        <label class="var">
+            alternating white and black
+			<input type="radio" name="task" value="white_begin">
+		</label>
+		<label class="var">
+            alternating black and white
+			<input type="radio" name="task" value="black_begin">
+		</label>
+    </div>
+    <br>
+    <div id="colors">
+    Enter color:
+        <label class="var">
+            White
+			<input type="radio" name="color" value="white" checked="True">
+		</label>
+		<label class="var">
+            Black
+			<input type="radio" name="color" value="black">
+		</label>
+    </div>
+    <br>
+    <button id="start" onclick="get_info()"> Let's start!</button>
+</body>
+</html>
