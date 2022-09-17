@@ -32,16 +32,59 @@
             eel.Array_test_generate(array_type, array_size, array_task, array_color)();
             window.location.href = 'Array_test.html';
         }
+
     </script>
     <script type="text/javascript">
         function change_simple(){
             $("#colors").css('display', 'block');
             $("#tasks").css('display', 'none');
+            change_task_simple();
         }
 
         function change_double(){
             $('#tasks').css('display', 'block');
             $("#colors").css('display', 'none');
+            change_task_white_black();
+        }
+
+        function change_task_white_black(){
+            $('#white_black').css('display', 'block');
+            $("#simple_mode").css('display', 'none');
+            $("#black_white").css('display', 'none');
+            $("#al_white").css('display', 'none');
+            $("#al_black").css('display', 'none');
+        }
+
+        function change_task_black_white(){
+            $('#white_black').css('display', 'none');
+            $("#simple_mode").css('display', 'none');
+            $("#black_white").css('display', 'block');
+            $("#al_white").css('display', 'none');
+            $("#al_black").css('display', 'none');
+        }
+
+        function change_task_simple(){
+            $('#white_black').css('display', 'none');
+            $("#simple_mode").css('display', 'block');
+            $("#black_white").css('display', 'none');
+            $("#al_white").css('display', 'none');
+            $("#al_black").css('display', 'none');
+        }
+
+        function change_task_al_white(){
+            $('#white_black').css('display', 'none');
+            $("#simple_mode").css('display', 'none');
+            $("#black_white").css('display', 'none');
+            $("#al_white").css('display', 'block');
+            $("#al_black").css('display', 'none');
+        }
+
+        function change_task_al_black(){
+            $('#white_black').css('display', 'none');
+            $("#simple_mode").css('display', 'none');
+            $("#black_white").css('display', 'none');
+            $("#al_white").css('display', 'none');
+            $("#al_black").css('display', 'block');
         }
 
     </script>
@@ -55,9 +98,16 @@
     </div>
     <p class="text"> It's Array test, please follow the task. <br>
         During the test: <br>
-    <ul align="center">
-        <li> <img src=""> Click all numbers in order.</li>
-    </ul>
+    <p align="center">
+    <p id="simple_mode">Click all numbers in order.</p>
+    <p id="white_black"> Click all white numbers in order, then click all black numbers in order.
+    </p>
+    <p id="black_white"> Click all black numbers in order, then click all white numbers in order.
+    </p>
+    <p id="al_white"> Click one by one white and black numbers.
+    </p>
+    <p id="al_black"> Click one by one black and white numbers.
+    </p>
     </p>    <h2>Please, enter settings:</h2>
     <div id="array_type">
 		<label class="var">
@@ -98,19 +148,19 @@
     Enter task:
         <label class="var">
             all white cells -> all black cells
-			<input type="radio" name="task" value="white" checked="True">
+			<input type="radio" name="task" value="white" checked="True" onchange="change_task_white_black()">
 		</label>
 		<label class="var">
             all black cells -> all white cells
-			<input type="radio" name="task" value="black">
+			<input type="radio" name="task" value="black" onchange="change_task_black_white()">
 		</label>
         <label class="var">
             alternating white and black
-			<input type="radio" name="task" value="white_begin">
+			<input type="radio" name="task" value="white_begin" onchange="change_task_al_white()">
 		</label>
 		<label class="var">
             alternating black and white
-			<input type="radio" name="task" value="black_begin">
+			<input type="radio" name="task" value="black_begin" onchange="change_task_al_black()">
 		</label>
     </div>
     <br>

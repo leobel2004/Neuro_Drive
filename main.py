@@ -1,17 +1,17 @@
 import eel
 import random
 import time
+import datetime
 
 
 #initialisation main menu
 @eel.expose
 def cover_init():
     eel.init('web')
-    eel.start('Cover.html', size=(520, 480))
+    eel.start('Cover.html')
 
 @eel.expose
 def Letter_test():
-    print('you are looser')
     return 1000
 
 
@@ -544,13 +544,40 @@ def Array_test_generate(type, size, task, color):
 
 @eel.expose
 def finish_Array_test(type, size, task):
-    timer = time.time() - time_start
+    timer = round(time.time() - time_start, 1)
     file = open('web/Array_test/Array_test_results.html', 'w')
-    file.write(str(timer) + '\n')
-    file.write(type + '\n')
-    file.write(size + 'X' + size + '\n')
-    file.write(task + '\n')
+    file_ex = open('web/Array_test/Array_test_results_example.html', 'r')
+    txt_file = open('web/Array_test/Array_test_results.txt', 'w')
+    text = file_ex.read()
+    text = text.replace('{type}', type)
+    text = text.replace("{size}", size + " X " + size)
+    text = text.replace('{timer}', str(timer))
+
+    txt_file.write("Type: " + type + '\n')
+    txt_file.write("Size: " + size + ' X ' + size + '\n')
+
+    if type == 'double':
+        task = 'all white cells -> all black cells'
+        if task == 'black':
+            task = 'all black cells -> all white cells'
+        elif task == 'white_begin':
+            task = "alternating white and black"
+        elif task == 'black_begin':
+            task = "alternating black and white"
+        text_task = f'<p class="name_of_res" id="task"> Task: <mark class="Num"> {task} </mark></p>'
+        text = text.replace('{task}', text_task)
+
+        txt_file.write("Task: " + task + '\n')
+
+    else:
+        text = text.replace("{task}", '')
+
+    txt_file.write("Total_time: " + str(timer) + '\n')
+    txt_file.close()
+
+    file.write(text)
     file.close()
+    file_ex.close()
 
 
 
