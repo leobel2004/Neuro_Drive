@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        <title>Reaction test</title>
+
+        <script src="eel.js"></script>
+        <link rel="icon" type="image/jpg" href="/favicon.jpg">
+
+        <link rel="stylesheet" href="Reaction_test_start.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link href="https://fonts.googleeapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+
+    <script type="text/javascript" src="/eel.js"></script>
+    <script type="text/javascript">
+        document.addEventListener("keydown", function (event) {
+            if (event.code == 'Escape'){
+                window.location.href = '../Cover.html';
+            }
+            if (event.code == 'Enter'){
+                get_info();
+            }
+        });
+
+
+        async function get_info(){
+            var time = document.getElementById('time').value;
+            const size = document.querySelector('input[name="size"]:checked').value;
+            var a = document.getElementById('stimul1').value;
+            var b = document.getElementById('stimul2').value;
+            var c = document.getElementById('stimul3').value;
+            var d = document.getElementById('stimul4').value;
+            var e = document.getElementById('stimul5').value;
+            var f = document.getElementById('stimul6').value;
+            eel.get_rt_time(time, a, b, c, d, e, f)();
+            window.location.href = 'Reaction_test_settings' + size + '.html';
+        }
+
+        function change_num(num){
+            let i = 1;
+            while (i < 7) {
+            var el = '.№' + i;
+            if (i <= num){
+            $(el).css('display', 'inline');}
+            else{
+            $(el).css('display', 'none');
+            }
+            i++;
+            }
+        }
+
+    </script>
+</head>
+<body align="center">
+    <div id="header">
+        <a href="../Cover.html" id="header_button"> Exit </a>
+        <span id='header_text'> Rules </span>
+        <span id="Space">
+        </span>
+    </div><h2>It's Reaction test.</h2>
+    <div id="array_size">
+        Please, choose count of stimuls:
+		<label class="var">
+            6
+			<input type="radio" name="size" value="6" onchange="change_num(6)">
+		</label>
+		<label class="var">
+            5
+			<input type="radio" name="size" value="5" onchange="change_num(5)">
+		</label>
+        <label class="var">
+            4
+			<input type="radio" name="size" value="4" onchange="change_num(4)">
+		</label>
+        <label class="var">
+            3
+			<input type="radio" name="size" value="3" onchange="change_num(3)">
+		</label>
+        <label class="var">
+            2
+			<input type="radio" name="size" value="2" onchange="change_num(2)">
+		</label>
+
+        <label class="var">
+            1
+			<input type="radio" name="size" value="1" onchange="change_num(1)">
+		</label>
+	</div>
+    <br>
+    <span class="№2"> Enter chances (%): </span> <br>
+    <span class="№2"> Stimul №1 :</span><input class="№2" id="stimul1"
+           type="number"
+           autocomplete="on | off"
+           placeholder="Chance"
+           min="10"
+           max="100"
+           required
+           value="100"
+    ><br class="№2"> <span class="№2"> Stimul №2 :</span><input class="№2" id="stimul2"
+           type="number"
+           autocomplete="on | off"
+           placeholder="Chance"
+           min="10"
+           max="100"
+           required
+           value="100"
+    ><br class="№2"> <span class="№3"> Stimul №3 :</span><input class="№3" id="stimul3"
+           type="number"
+           autocomplete="on | off"
+           placeholder="Chance"
+           min="10"
+           max="100"
+           required
+           value="100"
+    ><br class="№3"> <span class="№4"> Stimul №4 :</span><input class="№4" id="stimul4"
+           type="number"
+           autocomplete="on | off"
+           placeholder="Chance"
+           min="10"
+           max="100"
+           required
+           value="100"
+    ><br class="№4"> <span class="№5"> Stimul №5 :</span><input class="№5" id="stimul5"
+           type="number"
+           autocomplete="on | off"
+           placeholder="Chance"
+           value="100"
+           min="10"
+           max="100"
+           required
+    ><br class="№5"> <span class="№6"> Stimul №6 :</span><input class="№6" id="stimul6"
+           type="number"
+           autocomplete="on | off"
+           placeholder="Chance"
+           min="10"
+           max="100"
+           required
+           value="100"
+    ><br>
+
+    <span> Time (seconds) : </span>
+    <input id="time"
+           type="number"
+           autocomplete="on | off"
+           placeholder="Number of seconds"
+           min="10"
+           max="1000"
+           required
+    >
+    <button id="start" onclick="get_info()"> Let's tune!</button>
+</body>
+</html>

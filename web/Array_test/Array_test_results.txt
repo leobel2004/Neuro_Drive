@@ -1,0 +1,4 @@
+Type: double
+Size: 6 X 6
+Task: all white cells -> all black cells
+Total_time: 64.1

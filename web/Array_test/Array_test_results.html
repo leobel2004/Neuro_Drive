@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Color test</title>
+
+    <script src="eel.js"></script>
+    <script type="text/javascript" src="/eel.js"></script>
+    <link rel="icon" type="image/jpg" href="/favicon.jpg">
+
+
+    <link rel="stylesheet" href="Array_test_results.css">
+    <link href="https://fonts.googleeapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <script type="text\javascript">
+        async function exit(){
+            window.location.href = '../Cover.html';
+        }
+        
+        document.addEventListener("keydown", function (event) {
+            if (event.code == 'Enter'){
+                window.location.href = '../Cover.html';
+        }
+            if (event.code == 'Escape'){
+                window.location.href = '../Cover.html';
+            }
+        });
+        
+    </script>
+
+
+</head>
+<body>
+<div align="center">
+    <h1 >Results:</h1>
+    <p class="name_of_res"> Type: <mark class="Num">
+        double
+</mark></p>
+    <p class="name_of_res"> Size: <mark class="Num">
+        6 X 6
+</mark></p>
+    <p class="name_of_res" id="task"> Task: <mark class="Num"> all white cells -> all black cells </mark></p>
+    <p class="name_of_res"> Mistakes count: <mark class="Num">
+        4
+</mark></p>
+    <p class="name_of_res"> Total time(seconds): <mark class="Num">
+        64.1
+</mark></p>
+    <a id="save_res" href="Array_test_results.txt" download> Save results </a>
+    <a href="../Cover.html" id='main_menu'> Main menu </a>
+</div>
+</body>
+</html>
