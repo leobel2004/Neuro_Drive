@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        <title>Reaction test</title>
+
+        <script src="eel.js"></script>
+        <link rel="icon" type="image/jpg" href="/favicon.jpg">
+
+        <link rel="stylesheet" href="Reaction_test_2.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link href="https://fonts.googleeapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+
+    <script type="text/javascript" src="/eel.js"></script>
+    <script type="text/javascript">
+    var key_1 = {key_1};
+    var trigger_1 = 0;
+    var key_2 = {key_2};
+    var trigger_2 = 0;
+    var key_3 = {key_3};
+    var trigger_3 = 0;
+    var timeleft = {time};
+    var not_target = 0;
+    var errors = 0;
+    var errors2 = 0;
+    var timer_1 = timeleft - {timer_1};
+    var timer_2 = timeleft - {timer_2};
+    var timer_3 = timeleft - {timer_3};
+    var downloadTimer = setInterval(async function(){
+            if(timeleft <= 0){
+                clearInterval(downloadTimer);
+                finish();
+            }
+                timeleft -= 1;
+              if (timeleft == timer_1){
+                eel.start_timer()();
+                $("#stimul_1").css('background', {color_1});
+                trigger_1 = 1;
+                if (key_1 == 'not'){
+                    not_target = 1;
+                }
+              }
+              if (timeleft == timer_2){
+                eel.start_timer()();
+                $("#stimul_2").css('background', {color_2});
+                trigger_2 = 1;
+                if (key_2 == 'not'){
+                    not_target = 1;
+                }
+              }
+              if (timeleft == timer_3){
+                eel.start_timer()();
+                $("#stimul_3").css('background', {color_3});
+                trigger_3 = 1;
+                if (key_3 == 'not'){
+                    not_target = 1;
+                }
+              }
+              if (timeleft == timer_1 - 3 && key_1 == 'not'){
+                $("#stimul_1").css('background', '#333333');
+                trigger_1 = 0;
+                not_target = 0;
+              }
+              if (timeleft == timer_2 - 3 && key_2 == 'not'){
+                $("#stimul_2").css('background', '#333333');
+                trigger_2 = 0;
+                not_target = 0;
+              }
+              if (timeleft == timer_3 - 3 && key_3 == 'not'){
+                $("#stimul_1").css('background', '#333333');
+                trigger_1 = 0;
+                not_target = 0;
+              }
+            }, 1000);
+
+
+
+        document.addEventListener("keydown", async function (event) {
+            if (trigger_1 == 1 && event.key == key_1){
+                let reaction = await eel.finish_timer()();
+                document.getElementById("reaction").innerHTML = 'Last reaction time : ' + reaction;
+                $("#stimul_1").css('background', '#333333');
+                trigger_1 = 0;
+            }else{
+            if (trigger_2 == 1 && event.key == key_2){
+                let reaction = await eel.finish_timer()();
+                document.getElementById("reaction").innerHTML = 'Last reaction time : ' + reaction;
+                $("#stimul_2").css('background', '#333333');
+                trigger_2 = 0;
+            }else{
+            if (trigger_3 == 1 && event.key == key_3){
+                let reaction = await eel.finish_timer()();
+                document.getElementById("reaction").innerHTML = 'Last reaction time : ' + reaction;
+                $("#stimul_3").css('background', '#333333');
+                trigger_3 = 0;
+            }else{
+            if (!(event.key == key_1 && trigger_1 == 1) | !(event.key == key_2 && trigger_2 == 1) | !(event.key == key_3 && trigger_3 == 1)){
+                if (not_target == 1){
+                    errors2 += 1;
+                }else{
+                errors += 1;}
+                document.getElementById("reaction").innerHTML = 'ERROR!';
+            }}}}
+        });
+
+        async function finish(){
+        eel.Reaction_test_finish(errors, errors2)();
+        window.location.href = 'Reaction_test_results.html';
+        }
+
+
+    </script>
+</head>
+<body align="center">
+    <div id="header">
+        <a href="../Cover.html" id="header_button"> Exit </a>
+        <span id='header_text'> Reaction test </span>
+        <span id="Space">
+        </span>
+    </div>
+    <div class="block">
+    <button id="stimul_1" class="circle"></button>
+    </div>
+    <div class="block">
+        <button id="stimul_2" class="circle"></button>
+        <button id="stimul_3" class="circle"></button>
+    </div>
+    <div id="reaction"> </div>
+</body>
+</html>

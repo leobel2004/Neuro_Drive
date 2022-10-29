@@ -526,11 +526,12 @@ def Array_test_generate(type, size, task, color):
             color2 = 'black'
             if task == 'black_begin':
                 color1, color2 = color2, color1
-            l = [f"<button class='{color2 if i % 2 else color1}{size}' onclick='check_number({i + 1})' id='num{i + 1}'>{i // 2 + 1}</button>\n" for i in range(end)]
+            l = [f"<button class='{(color2 if i % 2 else color1) if i <= (end + 1) // 2 or (end + 1) // 2 % 2 == 1 else (color1 if i % 2 else color2)}{size}' onclick='check_number({i + 1})' id='num{i + 1}'>{i + 1 if i <= (end + 1) // 2 else i - (end + 1) // 2 + 1}</button>\n" for i in range(end)]
+            end = (end + 1) // 2
     random.shuffle(l)
     text = '<div class="work">\n'
-    for i in range(end):
-        if i == end:
+    for i in range(int(size) ** 2):
+        if i == int(size) ** 2:
             text += '</div>\n'
         elif i % int(size) == 0 and i != 0:
             text += '</div>\n<div class="work">\n'
@@ -543,12 +544,13 @@ def Array_test_generate(type, size, task, color):
     time_start = time.time()
 
 @eel.expose
-def finish_Array_test(type, size, task):
+def finish_Array_test(type, size, task, mistakes):
     timer = round(time.time() - time_start, 1)
     file = open('web/Array_test/Array_test_results.html', 'w')
     file_ex = open('web/Array_test/Array_test_results_example.html', 'r')
     txt_file = open('web/Array_test/Array_test_results.txt', 'w')
     text = file_ex.read()
+    text = text.replace('{mistakes}', str(mistakes))
     text = text.replace('{type}', type)
     text = text.replace("{size}", size + " X " + size)
     text = text.replace('{timer}', str(timer))
@@ -580,6 +582,93 @@ def finish_Array_test(type, size, task):
     file_ex.close()
 
 
+#functions for Reaction test
+@eel.expose
+def get_rt_time(time_rt, a, b, c, d, e, f):
+    rt_time[0] = time_rt
+    chances[0] = int(a)
+    chances[1] = int(b)
+    chances[2] = int(c)
+    chances[3] = int(d)
+    chances[4] = int(e)
+    chances[5] = int(f)
+
+
+@eel.expose
+def Reaction_test_generate(count, colors, keys):
+    name = 'web/Reaction_test/Reaction_test_' + str(count) + '_example.html'
+    colors = list(colors.split())
+    keys = list(keys.split(','))
+    file_ex = open(name, 'r')
+    file = open('web/Reaction_test/Reaction_test.html', 'w')
+    text = file_ex.read()
+    full_count[0] = int(count)
+    for i in range(int(count)):
+        if keys[i] != 'not':
+            stimul_count[0] += 1
+        n = str(i + 1)
+        if chances[i] >= random.randint(0, 100):
+            timer = random.randint(1, int(rt_time[0]))
+        else:
+            timer = 1000000000
+        s_timer = '{timer_' + n + '}'
+        key = '{key_' + n + '}'
+        color = '{color_' + n + '}'
+        text = text.replace(s_timer, str(timer))
+        text = text.replace(key, "'" + keys[i] + "'")
+        text = text.replace(color, "'" + colors[i] + "'")
+    text = text.replace('{time}', rt_time[0])
+    file.write(text)
+    file.close()
+    file_ex.close()
+
+
+@eel.expose
+def start_timer():
+    global time_start
+    time_start = time.time()
+
+
+@eel.expose
+def finish_timer():
+    timer = time.time() - time_start
+    results.append(timer)
+    return str(round(timer, 3))
+
+@eel.expose
+def Reaction_test_finish(errors1, errors2):
+    file = open('web/Reaction_test/Reaction_test_results.html', 'w')
+    file_ex = open('web/Reaction_test/Reaction_test_results_example.html', 'r')
+    text = file_ex.read()
+    file_ex.close()
+    text = text.replace('{total_time}', rt_time[0])
+    text = text.replace('{best_time}', str(round(min(results), 3)))
+    text = text.replace('{mean_time}', str(round(sum(results) / len(results), 3)))
+    text = text.replace('{count_stimul}', str(stimul_count[0]))
+    text = text.replace('{non_target_errors}', str(errors2) + ' / ' + str(round(int(errors2) / full_count[0], 2) * 100) + '%')
+    text = text.replace('{target_errors}', str(errors1) + ' / ' + str(round(int(errors1) / stimul_count[0], 2) * 100) + '%')
+    file.write(text)
+    file.close()
+    file = open('web/Reaction_test/results.txt', 'w')
+    file.write(f'Time: {rt_time[0]} \n')
+    file.write(f'Best Reaction Time: {str(round(min(results), 3))} \n')
+    file.write(f'Average Reaction Time: {str(round(sum(results) / len(results), 3))} \n')
+    file.write(f'Number of stimuli: {str(stimul_count[0])}\n')
+    file.write(f'Error reactions to distractors: {str(errors2) + " / " + str(round(int(errors2) / full_count[0], 2) * 100) + "%"}\n')
+    file.write(f'Error reactions to targeted stimuli:{errors1}\n')
+    file.close()
+    file = open('web/Reaction_test/statistics.txt', 'w')
+    file.write('Times :\n')
+    for el in results:
+        file.write(str(el) + '\n')
+    file.close()
+
+
+
+
+
+
+
 
 
 
@@ -602,6 +691,13 @@ words = []
 words_colors = []
 index = 0
 color_cash = []
+
+#reaction_test variables
+rt_time = [10]
+chances = [100, 100, 100, 100, 100, 100]
+results = []
+stimul_count = [0]
+full_count = [0]
 
 
 # initialisation app

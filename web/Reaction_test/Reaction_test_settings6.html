@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        <title>Array test</title>
+
+        <script src="eel.js"></script>
+        <link rel="icon" type="image/jpg" href="/favicon.jpg">
+
+        <link rel="stylesheet" href="Reaction_test_settings3.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link href="https://fonts.googleeapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+
+    <script type="text/javascript" src="/eel.js"></script>
+    <script type="text/javascript">
+    var key1 = 'not';
+    var key2 = 'not';
+    var key3 = 'not';
+    var key4 = 'not';
+    var key5 = 'not';
+    var key6 = 'not';
+    var trigger = 0;
+    $(function() {
+        $('#stimul1').change(function () {
+            var color = $(this).find(':selected').val();
+            $("#stimul_1").css('background', color);
+        });
+        $('#stimul2').change(function () {
+            var color = $(this).find(':selected').val();
+            $("#stimul_2").css('background', color);
+        });
+
+        $('#stimul3').change(function () {
+            var color = $(this).find(':selected').val();
+            $("#stimul_3").css('background', color);
+        });
+
+        $('#stimul4').change(function () {
+            var color = $(this).find(':selected').val();
+            $("#stimul_4").css('background', color);
+        });
+
+        $('#stimul5').change(function () {
+            var color = $(this).find(':selected').val();
+            $("#stimul_5").css('background', color);
+        });
+
+        $('#stimul6').change(function () {
+            var color = $(this).find(':selected').val();
+            $("#stimul_6").css('background', color);
+        });
+    });
+
+        document.addEventListener("keydown", function (event) {
+            if (trigger == 1){
+                key1 = event.key;
+                document.getElementById("stimul_1").innerHTML = event.key;
+            }
+            if (trigger == 2){
+                key2 = event.key;
+                document.getElementById("stimul_2").innerHTML = event.key;
+            }
+            if (trigger == 3){
+                key3 = event.key;
+                document.getElementById("stimul_3").innerHTML = event.key;
+            }
+            if (trigger == 4){
+                key4 = event.key;
+                document.getElementById("stimul_4").innerHTML = event.key;
+            }
+            if (trigger == 5){
+                key5 = event.key;
+                document.getElementById("stimul_5").innerHTML = event.key;
+            }
+            if (trigger == 6){
+                key6 = event.key;
+                document.getElementById("stimul_6").innerHTML = event.key;
+            }
+            if (event.code == 'Escape'){
+                window.location.href = '../Cover.html';
+            }
+        });
+
+
+        async function get_info(){
+            var colors = document.getElementById('stimul1').value + ' ' + document.getElementById('stimul2').value + ' ' + document.getElementById('stimul3').value + ' ' + document.getElementById('stimul4').value + ' ' + document.getElementById('stimul5').value + ' ' + document.getElementById('stimul6').value;
+            var keys = key1 + ',' + key2 + ',' + key3 + ',' + key4 + ',' + key5  + ',' + key6;
+            var count = 6;
+            eel.Reaction_test_generate(count, colors, keys)();
+            window.location.href = 'Reaction_test.html';
+        }
+
+
+        function handle(n) {
+            trigger = n;
+            $("#stimul_" + n).css('outline', '3px solid black');
+            var timeleft = 3;
+            var downloadTimer = setInterval(function(){
+            if(timeleft <= 0){
+                trigger = 0;
+                $("#stimul_" + n).css('outline', 'none');
+                clearInterval(downloadTimer);
+            }
+                timeleft -= 1;
+            }, 1000);
+
+        }
+
+    </script>
+</head>
+<body align="center">
+    <div id="header">
+        <a href="../Cover.html" id="header_button"> Exit </a>
+        <span id='header_text'> Settings </span>
+        <span id="Space">
+        </span>
+    </div>
+    <h2>Please, choose colors of stimuls:</h2>
+    <div class="block">
+    <button id="stimul_1" class="circle" onclick="handle(1)"> </button>
+    <button id="stimul_2" class="circle" onclick="handle(2)"> </button>
+    <button id="stimul_3" class="circle" onclick="handle(3)"> </button>
+    </div>
+    <div class="colors">
+        <select id="stimul1" align="center">
+        <option value='red'>Red</option>
+        <option value='green'>Green</option>
+        <option value='yellow'>Yellow</option>
+        <option value='blue'>Blue</option>
+        <option value='purple'>Purple</option>
+        <option value='grey'>Grey</option>
+        </select>
+
+        <select id="stimul2" align="center">
+        <option value='red'>Red</option>
+        <option value='green'>Green</option>
+        <option value='yellow'>Yellow</option>
+        <option value='blue'>Blue</option>
+        <option value='purple'>Purple</option>
+        <option value='grey'>Grey</option>
+        </select>
+
+        <select id="stimul3" align="center">
+        <option value='red'>Red</option>
+        <option value='green'>Green</option>
+        <option value='yellow'>Yellow</option>
+        <option value='blue'>Blue</option>
+        <option value='purple'>Purple</option>
+        <option value='grey'>Grey</option>
+        </select>
+    </div>
+    <div class="block">
+    <button id="stimul_4" class="circle" onclick="handle(4)">  </button>
+    <button id="stimul_5" class="circle" onclick="handle(5)">  </button>
+        <button id="stimul_6" class="circle" onclick="handle(6)">  </button>
+    </div>
+    <div class="colors">
+    <select id="stimul4" align="center">
+        <option value='red'>Red</option>
+        <option value='green'>Green</option>
+        <option value='yellow'>Yellow</option>
+        <option value='blue'>Blue</option>
+        <option value='purple'>Purple</option>
+        <option value='grey'>Grey</option>
+        </select>
+
+    <select id="stimul5" align="center">
+        <option value='red'>Red</option>
+        <option value='green'>Green</option>
+        <option value='yellow'>Yellow</option>
+        <option value='blue'>Blue</option>
+        <option value='purple'>Purple</option>
+        <option value='grey'>Grey</option>
+        </select>
+        <select id="stimul6" align="center">
+        <option value='red'>Red</option>
+        <option value='green'>Green</option>
+        <option value='yellow'>Yellow</option>
+        <option value='blue'>Blue</option>
+        <option value='purple'>Purple</option>
+        <option value='grey'>Grey</option>
+        </select>
+    </div>
+    <br>
+    <button id="start" onclick="get_info()"> Let's start!</button>
+</body>
+</html>

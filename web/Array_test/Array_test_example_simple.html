@@ -15,7 +15,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
         async function finish(){
-            eel.finish_Array_test("{type}", "{size}", "{task}")();
+            eel.finish_Array_test("{type}", "{size}", "{task}", mistakes)();
             window.location.href = 'Array_test_results.html';
         }
 
@@ -34,6 +34,7 @@
         var num_now = 0;
         const type = "{type}";
         const task = "{task}";
+        var mistakes = 0;
 
         function check_number(n){
             if (n == num_now + 1){
@@ -61,6 +62,7 @@
         }
 
         function make_red(n){
+            mistakes += 1;
             var timeleft = 2;
             var t = setInterval(function(){
             if(timeleft <= 0){
@@ -70,35 +72,35 @@
                 document.getElementById("num" + n).classList.toggle('red');}
             }, 200);
             if (type == 'simple'){
-            document.getElementById('Hinter').innerHTML = "Now, you need to press " + (num_now + 1);
+            document.getElementById('Hinter').innerHTML = "Now you need to press " + (num_now + 1);
             }else{
             if(task == 'white'){
                 if (num_now < half){
-                    document.getElementById('Hinter').innerHTML = "Now, you need to press white " + (num_now + 1);
+                    document.getElementById('Hinter').innerHTML = "Now you need to press white " + (num_now + 1);
                 }else{
-                    document.getElementById('Hinter').innerHTML = "Now, you need to press black " + (num_now + 1 - half);
+                    document.getElementById('Hinter').innerHTML = "Now you need to press black " + (num_now + 1 - half);
                 }
             }
             if(task == 'black'){
                 if (num_now < half){
-                    document.getElementById('Hinter').innerHTML = "Now, you need to press black " + (num_now + 1);
+                    document.getElementById('Hinter').innerHTML = "Now you need to press black " + (num_now + 1);
                 }else{
-                    document.getElementById('Hinter').innerHTML = "Now, you need to press white " + (num_now + 1 - half);
+                    document.getElementById('Hinter').innerHTML = "Now you need to press white " + (num_now + 1 - half);
                 }
             }
             if(task == 'white_begin'){
                 if (num_now % 2 == 0){
-                    document.getElementById('Hinter').innerHTML = "Now, you need to press white " + (Math.floor(num_now / 2) + 1);
+                    document.getElementById('Hinter').innerHTML = "Now you need to press white " + (num_now + 1);
                 }else{
-                    document.getElementById('Hinter').innerHTML = "Now, you need to press black " + (Math.floor(num_now / 2) + 1);
+                    document.getElementById('Hinter').innerHTML = "Now you need to press black " + (num_now + 1);
                 }
             }
 
             if(task == 'black_begin'){
                 if (num_now % 2 == 1){
-                    document.getElementById('Hinter').innerHTML = "Now, you need to press white " + (Math.floor(num_now / 2) + 1);
+                    document.getElementById('Hinter').innerHTML = "Now you need to press white " + (num_now + 1);
                 }else{
-                    document.getElementById('Hinter').innerHTML = "Now, you need to press black " + (Math.floor(num_now / 2) + 1);
+                    document.getElementById('Hinter').innerHTML = "Now you need to press black " + (num_now + 1);
                 }
             }
 
