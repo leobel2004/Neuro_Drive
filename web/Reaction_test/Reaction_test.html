@@ -16,11 +16,11 @@
     <script type="text/javascript">
     var key = [0, 0, 0, 0, 0, 0];
     var trigger = [0, 0, 0, 0, 0, 0];
-    key[0] = 'w';
+    key[0] = 'q';
     trigger[0] = 0;
-    key[1] = 'q';
+    key[1] = 'w';
     trigger[1] = 0;
-    key[2] = 'e';
+    key[2] = 'not';
     trigger[2] = 0;
     key[3] = 'not';
     trigger[3] = 0;
@@ -28,17 +28,17 @@
     trigger[4] = 0;
     key[5] = 'not';
     trigger[5] = 0;
-    var timeleft = 21;
+    var timeleft = 20;
     var count_non_target = 0;
     var errors = 0;
     var errors2 = 0;
     var timer = [0, 0, 0, 0, 0, 0];
-    timer[0] = timeleft - 22;
-    timer[1] = timeleft - 22;
-    timer[2] = timeleft - 22;
-    timer[3] = timeleft - 22;
-    timer[4] = timeleft - 22;
-    timer[5] = timeleft - 22;
+    timer[0] = timeleft - 21;
+    timer[1] = timeleft - 21;
+    timer[2] = timeleft - 21;
+    timer[3] = timeleft - 21;
+    timer[4] = timeleft - 21;
+    timer[5] = timeleft - 21;
     var last_timer = timeleft;
 
     async function get_timer(){
@@ -224,10 +224,11 @@
     </div>
     <div class="block">
     <button id="stimul_1" class="circle"></button>
+        <button id="stimul_2" class="circle"></button>
     </div>
     <div class="block">
-        <button id="stimul_2" class="circle"></button>
         <button id="stimul_3" class="circle"></button>
+    <button id="stimul_4" class="circle"></button>
     </div>
     <div id="reaction"> </div>
 </body>

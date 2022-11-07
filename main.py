@@ -587,12 +587,12 @@ def finish_Array_test(type, size, task, mistakes):
 def get_rt_time(size, time_rt, a, b, c, d, e, f):
     rt_time[0] = time_rt
     ch = [0] * 6
-    ch[0] = int(a)
-    ch[1] = int(b)
-    ch[2] = int(c)
-    ch[3] = int(d)
-    ch[4] = int(e)
-    ch[5] = int(f)
+    ch[0] = round(float(a))
+    ch[1] = round(float(b))
+    ch[2] = round(float(c))
+    ch[3] = round(float(d))
+    ch[4] = round(float(e))
+    ch[5] = round(float(f))
     now = 0
     for i in range(int(size)):
         for j in range(now, now + ch[i]):
@@ -673,22 +673,22 @@ def Reaction_test_finish(errors1, errors2, count_non_target):
     if len(results) == 0:
         results.append(1)
     text = text.replace('{mean_time}', str(round(sum(results) / len(results), 3)))
-    text = text.replace('{count_stimul}', str(count_reaction_test[0]))
+    text = text.replace('{count_stimul}', str(count_reaction_test[0] - 1))
     if count_non_target == 0:
         count_non_target = 1
     if full_count[0] == 0:
         full_count[0] = 1
     text = text.replace('{non_target_errors}', str(errors2) + ' / ' + str(round(int(errors2) / int(count_non_target), 2) * 100) + '%')
-    text = text.replace('{target_errors}', str(errors1) + ' / ' + str(round(int(errors1) / full_count[0] - int(count_non_target), 2) * 100) + '%')
+    text = text.replace('{target_errors}', str(errors1) + ' / ' + str(round(int(errors1) / (count_reaction_test[0] - 1) - int(count_non_target), 2) * 100) + '%')
     file.write(text)
     file.close()
     file = open('web/Reaction_test/results.txt', 'w')
     file.write(f'Time: {rt_time[0]} \n')
     file.write(f'Best Reaction Time: {str(round(min(results), 3))} \n')
     file.write(f'Average Reaction Time: {str(round(sum(results) / len(results), 3))} \n')
-    file.write(f'Number of stimuli: {str(count_reaction_test[0])}\n')
+    file.write(f'Number of stimuli: {str(count_reaction_test[0] - 1)}\n')
     file.write(f'Error reactions to distractors: {str(errors2) + " / " + str(round(int(errors2) / count_non_target, 2) * 100) + "%"}\n')
-    file.write(f'Error reactions to targeted stimuli:{str(errors1) + "/" + str(round(int(errors1) / full_count[0] - int(count_non_target), 2) * 100) + "%"}\n')
+    file.write(f'Error reactions to targeted stimuli:{str(errors1) + "/" + str(round(int(errors1) / (count_reaction_test[0] - 1) - int(count_non_target), 2) * 100) + "%"}\n')
     file.close()
     file = open('web/Reaction_test/statistics.txt', 'w')
     file.write('Times :\n')

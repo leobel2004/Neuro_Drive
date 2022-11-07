@@ -1,6 +1,6 @@
-Time: 21 
-Best Reaction Time: 0.312 
-Average Reaction Time: 0.492 
+Time: 20 
+Best Reaction Time: 0.369 
+Average Reaction Time: 0.548 
 Number of stimuli: 7
 Error reactions to distractors: 0 / 0.0%
 Error reactions to targeted stimuli:0/-100.0%
