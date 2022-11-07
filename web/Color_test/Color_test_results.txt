@@ -1,4 +1,4 @@
 Number of words: 7
 Number of errors: 7
 Percentage of errors: 100.0 %
-Total time: 10.0
+Total time: 13.0

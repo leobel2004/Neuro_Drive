@@ -33,7 +33,7 @@
             var d = document.getElementById('stimul4').value;
             var e = document.getElementById('stimul5').value;
             var f = document.getElementById('stimul6').value;
-            eel.get_rt_time(time, a, b, c, d, e, f)();
+            eel.get_rt_time(size, time, a, b, c, d, e, f)();
             window.location.href = 'Reaction_test_settings' + size + '.html';
         }
 
@@ -49,6 +49,102 @@
             i++;
             }
         }
+
+
+        jQuery(function($) {
+        $('#stimul1').on('input', function() {
+            var n = 100 - document.getElementById('stimul1').value;
+            var changed_sum = document.getElementById('stimul1').value;
+            var i = 2;
+            const size = document.querySelector('input[name="size"]:checked').value;
+            while (i <= size){
+                var s = 'stimul' + i;
+                document.getElementById(s).value = n / (size - i + 1);
+                n -= document.getElementById(s).value;
+                i += 1;
+            }
+            while (i <= 6){
+                var s = 'stimul' + i;
+                document.getElementById(s).value = 0;
+                i += 1;
+            }
+        });
+
+        $('#stimul2').on('input', function() {
+            var n = 100 - document.getElementById('stimul1').value - document.getElementById('stimul2').value;
+            var i = 3;
+            const size = document.querySelector('input[name="size"]:checked').value;
+            while (i <= size){
+                var s = 'stimul' + i;
+                document.getElementById(s).value = n / (size - i + 1);
+                n -= document.getElementById(s).value;
+                i += 1;
+            }
+            while (i <= 6){
+                var s = 'stimul' + i;
+                document.getElementById(s).value = 0;
+                i += 1;
+            }
+        });
+
+        $('#stimul3').on('input', function() {
+            var n = 100 - document.getElementById('stimul1').value - document.getElementById('stimul2').value - document.getElementById('stimul3').value;
+            var i = 4;
+            const size = document.querySelector('input[name="size"]:checked').value;
+            while (i <= size){
+                var s = 'stimul' + i;
+                document.getElementById(s).value = n / (size - i + 1);
+                n -= document.getElementById(s).value;
+                i += 1;
+            }
+            while (i <= 6){
+                var s = 'stimul' + i;
+                document.getElementById(s).value = 0;
+                i += 1;
+            }
+        });
+
+        $('#stimul4').on('input', function() {
+            var n = 100 - document.getElementById('stimul1').value - document.getElementById('stimul2').value - document.getElementById('stimul3').value - document.getElementById('stimul4').value;
+            var i = 5;
+            const size = document.querySelector('input[name="size"]:checked').value;
+            while (i <= size){
+                var s = 'stimul' + i;
+                document.getElementById(s).value = n / (size - i + 1);
+                n -= document.getElementById(s).value;
+                i += 1;
+            }
+            while (i <= 6){
+                var s = 'stimul' + i;
+                document.getElementById(s).value = 0;
+                i += 1;
+            }
+        });
+
+        $('#stimul5').on('input', function() {
+            var n = 100 - document.getElementById('stimul1').value - document.getElementById('stimul2').value - document.getElementById('stimul3').value - document.getElementById('stimul4').value -  - document.getElementById('stimul5').value;
+            var i = 6;
+            const size = document.querySelector('input[name="size"]:checked').value;
+            while (i <= size){
+                var s = 'stimul' + i;
+                document.getElementById(s).value = n / (size - i + 1);
+                n -= document.getElementById(s).value;
+                i += 1;
+            }
+            while (i <= 6){
+                var s = 'stimul' + i;
+                document.getElementById(s).value = 0;
+                i += 1;
+            }
+        });
+
+        $('#stimul6').on('input', function() {
+            var changed_sum = document.getElementById('stimul1').value + document.getElementById('stimul2').value + document.getElementById('stimul3').value + document.getElementById('stimul4').value + document.getElementById('stimul5').value;
+            if (document.getElementById(stimul6).value + changed_sum > 100){
+                document.getElementById(stimul6).value = 100 - changed_sum;
+            }
+        });
+        });
 
     </script>
 </head>
@@ -104,7 +200,7 @@
            min="10"
            max="100"
            required
-           value="100"
+           value="0"
     ><br class="№2"> <span class="№3"> Stimul №3 :</span><input class="№3" id="stimul3"
            type="number"
            autocomplete="on | off"
@@ -112,7 +208,7 @@
            min="10"
            max="100"
            required
-           value="100"
+           value="0"
     ><br class="№3"> <span class="№4"> Stimul №4 :</span><input class="№4" id="stimul4"
            type="number"
            autocomplete="on | off"
@@ -120,12 +216,12 @@
            min="10"
            max="100"
            required
-           value="100"
+           value="0"
     ><br class="№4"> <span class="№5"> Stimul №5 :</span><input class="№5" id="stimul5"
            type="number"
            autocomplete="on | off"
            placeholder="Chance"
-           value="100"
+           value="0"
            min="10"
            max="100"
            required
@@ -136,7 +232,7 @@
            min="10"
            max="100"
            required
-           value="100"
+           value="0"
     ><br>
 
     <span> Time (seconds) : </span>

@@ -420,8 +420,8 @@ def get_theme():
 #functions for color test
 @eel.expose
 def Color_test_generate(timelimit):
-    global Colors, words, words_colors, color_index, color_cash, time_start
-    color_index = 0
+    global Colors, words, words_colors, index, color_cash, time_start
+    index = 0
     color_cash = []
     words = []
     words_colors = []
@@ -584,14 +584,21 @@ def finish_Array_test(type, size, task, mistakes):
 
 #functions for Reaction test
 @eel.expose
-def get_rt_time(time_rt, a, b, c, d, e, f):
+def get_rt_time(size, time_rt, a, b, c, d, e, f):
     rt_time[0] = time_rt
-    chances[0] = int(a)
-    chances[1] = int(b)
-    chances[2] = int(c)
-    chances[3] = int(d)
-    chances[4] = int(e)
-    chances[5] = int(f)
+    ch = [0] * 6
+    ch[0] = int(a)
+    ch[1] = int(b)
+    ch[2] = int(c)
+    ch[3] = int(d)
+    ch[4] = int(e)
+    ch[5] = int(f)
+    now = 0
+    for i in range(int(size)):
+        for j in range(now, now + ch[i]):
+            chances[j] = i
+        now += ch[i]
+
 
 
 @eel.expose
@@ -603,14 +610,14 @@ def Reaction_test_generate(count, colors, keys):
     file = open('web/Reaction_test/Reaction_test.html', 'w')
     text = file_ex.read()
     full_count[0] = int(count)
-    for i in range(int(count)):
+    for i in range(6):
+        if i >= len(keys):
+            keys.append('not')
+            colors.append('red')
         if keys[i] != 'not':
             stimul_count[0] += 1
         n = str(i + 1)
-        if chances[i] >= random.randint(0, 100):
-            timer = random.randint(1, int(rt_time[0]))
-        else:
-            timer = 1000000000
+        timer = int(rt_time[0]) + 1
         s_timer = '{timer_' + n + '}'
         key = '{key_' + n + '}'
         color = '{color_' + n + '}'
@@ -636,26 +643,52 @@ def finish_timer():
     return str(round(timer, 3))
 
 @eel.expose
-def Reaction_test_finish(errors1, errors2):
+def getting_timer(last_timer, timer, triggers):
+    count_reaction_test[0] += 1
+    last_timer = int(last_timer)
+    timer = list(map(int, timer.split(',')))
+    triggers = list(map(int, triggers.split(',')))
+    nex = -1
+    while nex == -1:
+        chance = random.randint(0, 99)
+        if not (triggers[chances[chance]]):
+            nex = chances[chance]
+    timer[nex] = last_timer - random.randint(2, 5)
+    print(timer)
+    return ','.join(map(str, timer))
+
+
+
+
+@eel.expose
+def Reaction_test_finish(errors1, errors2, count_non_target):
+    if count_non_target == '0':
+        count_non_target = '100000000000'
     file = open('web/Reaction_test/Reaction_test_results.html', 'w')
     file_ex = open('web/Reaction_test/Reaction_test_results_example.html', 'r')
     text = file_ex.read()
     file_ex.close()
     text = text.replace('{total_time}', rt_time[0])
     text = text.replace('{best_time}', str(round(min(results), 3)))
+    if len(results) == 0:
+        results.append(1)
     text = text.replace('{mean_time}', str(round(sum(results) / len(results), 3)))
-    text = text.replace('{count_stimul}', str(stimul_count[0]))
-    text = text.replace('{non_target_errors}', str(errors2) + ' / ' + str(round(int(errors2) / full_count[0], 2) * 100) + '%')
-    text = text.replace('{target_errors}', str(errors1) + ' / ' + str(round(int(errors1) / stimul_count[0], 2) * 100) + '%')
+    text = text.replace('{count_stimul}', str(count_reaction_test[0]))
+    if count_non_target == 0:
+        count_non_target = 1
+    if full_count[0] == 0:
+        full_count[0] = 1
+    text = text.replace('{non_target_errors}', str(errors2) + ' / ' + str(round(int(errors2) / int(count_non_target), 2) * 100) + '%')
+    text = text.replace('{target_errors}', str(errors1) + ' / ' + str(round(int(errors1) / full_count[0] - int(count_non_target), 2) * 100) + '%')
     file.write(text)
     file.close()
     file = open('web/Reaction_test/results.txt', 'w')
     file.write(f'Time: {rt_time[0]} \n')
     file.write(f'Best Reaction Time: {str(round(min(results), 3))} \n')
     file.write(f'Average Reaction Time: {str(round(sum(results) / len(results), 3))} \n')
-    file.write(f'Number of stimuli: {str(stimul_count[0])}\n')
-    file.write(f'Error reactions to distractors: {str(errors2) + " / " + str(round(int(errors2) / full_count[0], 2) * 100) + "%"}\n')
-    file.write(f'Error reactions to targeted stimuli:{errors1}\n')
+    file.write(f'Number of stimuli: {str(count_reaction_test[0])}\n')
+    file.write(f'Error reactions to distractors: {str(errors2) + " / " + str(round(int(errors2) / count_non_target, 2) * 100) + "%"}\n')
+    file.write(f'Error reactions to targeted stimuli:{str(errors1) + "/" + str(round(int(errors1) / full_count[0] - int(count_non_target), 2) * 100) + "%"}\n')
     file.close()
     file = open('web/Reaction_test/statistics.txt', 'w')
     file.write('Times :\n')
@@ -694,8 +727,9 @@ color_cash = []
 
 #reaction_test variables
 rt_time = [10]
-chances = [100, 100, 100, 100, 100, 100]
+chances = [0] * 100
 results = []
+count_reaction_test = [0]
 stimul_count = [0]
 full_count = [0]
 

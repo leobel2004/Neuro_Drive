@@ -14,46 +14,147 @@
 
     <script type="text/javascript" src="/eel.js"></script>
     <script type="text/javascript">
-    var key_1 = {key_1};
-    var trigger_1 = 0;
-    var key_2 = {key_2};
-    var trigger_2 = 0;
+    var key = [0, 0, 0, 0, 0, 0];
+    var trigger = [0, 0, 0, 0, 0, 0];
+    key[0] = {key_1};
+    trigger[0] = 0;
+    key[1] = {key_2};
+    trigger[1] = 0;
+    key[2] = {key_3};
+    trigger[2] = 0;
+    key[3] = {key_4};
+    trigger[3] = 0;
+    key[4] = {key_5};
+    trigger[4] = 0;
+    key[5] = {key_6};
+    trigger[5] = 0;
     var timeleft = {time};
-    var not_target = 0;
+    var count_non_target = 0;
     var errors = 0;
     var errors2 = 0;
-    var timer_1 = timeleft - {timer_1};
-    var timer_2 = timeleft - {timer_2};
+    var timer = [0, 0, 0, 0, 0, 0];
+    timer[0] = timeleft - {timer_1};
+    timer[1] = timeleft - {timer_2};
+    timer[2] = timeleft - {timer_3};
+    timer[3] = timeleft - {timer_4};
+    timer[4] = timeleft - {timer_5};
+    timer[5] = timeleft - {timer_6};
+    var last_timer = timeleft;
+
+    async function get_timer(){
+        var a = String(last_timer);
+        var b = timer.join(',');
+        var c = trigger.join(',');
+        let l = await eel.getting_timer(a, b, c)();
+        var timer_list = l.split(',');
+        var i = 0;
+        while (i < 6){
+            timer[i] = Number(timer_list[i]);
+            i += 1;
+        }
+    }
+
+    get_timer();
     var downloadTimer = setInterval(async function(){
             if(timeleft <= 0){
                 clearInterval(downloadTimer);
                 finish();
             }
                 timeleft -= 1;
-              if (timeleft == timer_1){
+              if (timeleft == timer[0]){
+                last_timer = timer[0];
+                get_timer();
                 eel.start_timer()();
                 $("#stimul_1").css('background', {color_1});
-                trigger_1 = 1;
+                trigger[0] = 1;
                 if (key_1 == 'not'){
                     not_target = 1;
+                    count_non_target += 1;
                 }
               }
-              if (timeleft == timer_2){
+              if (timeleft == timer[1]){
+                last_timer = timer[1];
+                get_timer();
                 eel.start_timer()();
                 $("#stimul_2").css('background', {color_2});
-                trigger_2 = 1;
+                trigger[1] = 1;
                 if (key_2 == 'not'){
                     not_target = 1;
+                    count_non_target += 1;
                 }
               }
-              if (timeleft == timer_1 - 3 && key_1 == 'not'){
+              if (timeleft == timer[2]){
+                last_timer = timer[2];
+                get_timer();
+                eel.start_timer()();
+                $("#stimul_3").css('background', {color_3});
+                trigger[2] = 1;
+                if (key_3 == 'not'){
+                    not_target = 1;
+                    count_non_target += 1;
+                }
+              }
+              if (timeleft == timer[3]){
+                last_timer = timer[3];
+                get_timer();
+                eel.start_timer()();
+                $("#stimul_4").css('background', {color_4});
+                trigger[3] = 1;
+                if (key_4 == 'not'){
+                    not_target = 1;
+                    count_non_target += 1;
+                }
+              }
+              if (timeleft == timer[4]){
+                last_timer = timer[4];
+                get_timer();
+                eel.start_timer()();
+                $("#stimul_5").css('background', {color_5});
+                trigger[4] = 1;
+                if (key_5 == 'not'){
+                    not_target = 1;
+                    count_non_target += 1;
+                }
+              }
+              if (timeleft == timer[5]){
+                last_timer = timer[5];
+                get_timer();
+                eel.start_timer()();
+                $("#stimul_6").css('background', {color_6});
+                trigger[5] = 1;
+                if (key_6 == 'not'){
+                    not_target = 1;
+                    count_non_target += 1;
+                }
+              }
+              if (timeleft == timer[0] - 3 && key[0] == 'not'){
                 $("#stimul_1").css('background', '#333333');
-                trigger_1 = 0;
+                trigger[0] = 0;
                 not_target = 0;
               }
-              if (timeleft == timer_2 - 3 && key_2 == 'not'){
+              if (timeleft == timer[1] - 3 && key[1] == 'not'){
                 $("#stimul_2").css('background', '#333333');
-                trigger_2 = 0;
+                trigger[1] = 0;
+                not_target = 0;
+              }
+              if (timeleft == timer[2] - 3 && key[2] == 'not'){
+                $("#stimul_3").css('background', '#333333');
+                trigger[2] = 0;
+                not_target = 0;
+              }
+              if (timeleft == timer[3] - 3 && key[3] == 'not'){
+                $("#stimul_4").css('background', '#333333');
+                trigger[3] = 0;
+                not_target = 0;
+              }
+              if (timeleft == timer[4] - 3 && key[4] == 'not'){
+                $("#stimul_5").css('background', '#333333');
+                trigger[4] = 0;
+                not_target = 0;
+              }
+              if (timeleft == timer[5] - 3 && key[5] == 'not'){
+                $("#stimul_6").css('background', '#333333');
+                trigger[5] = 0;
                 not_target = 0;
               }
             }, 1000);
@@ -61,29 +162,53 @@
 
 
         document.addEventListener("keydown", async function (event) {
-            if (trigger_1 == 1 && event.key == key_1){
+            if (trigger[0] == 1 && event.key == key[0]){
                 let reaction = await eel.finish_timer()();
                 document.getElementById("reaction").innerHTML = 'Last reaction time : ' + reaction;
                 $("#stimul_1").css('background', '#333333');
-                trigger_1 = 0;
+                trigger[0] = 0;
             }else{
-            if (trigger_2 == 1 && event.key == key_2){
+            if (trigger[1] == 1 && event.key == key[1]){
                 let reaction = await eel.finish_timer()();
                 document.getElementById("reaction").innerHTML = 'Last reaction time : ' + reaction;
                 $("#stimul_2").css('background', '#333333');
-                trigger_2 = 0;
+                trigger[1] = 0;
             }else{
-            if (!(event.key == key_1 && trigger_1 == 1) | !(event.key == key_2 && trigger_2 == 1)){
+            if (trigger[2] == 1 && event.key == key[2]){
+                let reaction = await eel.finish_timer()();
+                document.getElementById("reaction").innerHTML = 'Last reaction time : ' + reaction;
+                $("#stimul_3").css('background', '#333333');
+                trigger[2] = 0;
+            }else{
+            if (trigger[3] == 1 && event.key == key[3]){
+                let reaction = await eel.finish_timer()();
+                document.getElementById("reaction").innerHTML = 'Last reaction time : ' + reaction;
+                $("#stimul_4").css('background', '#333333');
+                trigger[3] = 0;
+            }else{
+            if (trigger[4] == 1 && event.key == key[4]){
+                let reaction = await eel.finish_timer()();
+                document.getElementById("reaction").innerHTML = 'Last reaction time : ' + reaction;
+                $("#stimul_5").css('background', '#333333');
+                trigger[4] = 0;
+            }else{
+            if (trigger[5] == 1 && event.key == key[5]){
+                let reaction = await eel.finish_timer()();
+                document.getElementById("reaction").innerHTML = 'Last reaction time : ' + reaction;
+                $("#stimul_6").css('background', '#333333');
+                trigger[5] = 0;
+            }else{
+            if (!(event.key == key[0] && trigger[0] == 1) | !(event.key == key[1] && trigger[1] == 1) | !(event.key == key[2] && trigger[2] == 1) | !(event.key == key[3] && trigger[3] == 1) | !(event.key == key[4] && trigger[4] == 1) | !(event.key == key[5] && trigger[5] == 1)){
                 if (not_target == 1){
                     errors2 += 1;
                 }else{
                 errors += 1;}
                 document.getElementById("reaction").innerHTML = 'ERROR!';
-            }}}
+            }}}}}}}
         });
 
         async function finish(){
-        eel.Reaction_test_finish(errors, errors2)();
+        eel.Reaction_test_finish(errors, errors2, count_non_target)();
         window.location.href = 'Reaction_test_results.html';
         }
 
